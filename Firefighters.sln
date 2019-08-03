@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29123.88
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firefighters.Common", "Firefighters.Common\Firefighters.Common.csproj", "{C4AD5B41-4512-4FC7-8672-F34A894C0C1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Firefighters.Web", "Firefighters.Web\Firefighters.Web.csproj", "{6C60A473-F240-46E3-9560-F6AA56FF00BF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C4AD5B41-4512-4FC7-8672-F34A894C0C1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4AD5B41-4512-4FC7-8672-F34A894C0C1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4AD5B41-4512-4FC7-8672-F34A894C0C1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4AD5B41-4512-4FC7-8672-F34A894C0C1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C60A473-F240-46E3-9560-F6AA56FF00BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C60A473-F240-46E3-9560-F6AA56FF00BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C60A473-F240-46E3-9560-F6AA56FF00BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C60A473-F240-46E3-9560-F6AA56FF00BF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {65851FCD-83DC-436A-9B63-DEAA4AB90A42}
+	EndGlobalSection
+EndGlobal
