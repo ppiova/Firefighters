@@ -54,7 +54,7 @@ namespace Firefighters.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,AreaName")] Area area)
+        public async Task<IActionResult> Create(Area area)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace Firefighters.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(short id, [Bind("Id,AreaName")] Area area)
+        public async Task<IActionResult> Edit(short id, Area area)
         {
             if (id != area.Id)
             {
