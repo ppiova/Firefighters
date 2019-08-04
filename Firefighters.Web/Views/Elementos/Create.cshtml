@@ -1,0 +1,94 @@
+﻿@model Firefighters.Web.Data.Entities.Elemento
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Elemento</h4>
+<hr />
+@*TODO: REVISAR MODELO DE DATOS PARA SU INGRESO - FECHAS Y ENUMS*@
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Descripcion" class="control-label"></label>
+                <input asp-for="Descripcion" class="form-control" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Modelo" class="control-label"></label>
+                <input asp-for="Modelo" class="form-control" />
+                <span asp-validation-for="Modelo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Marca" class="control-label"></label>
+                <input asp-for="Marca" class="form-control" />
+                <span asp-validation-for="Marca" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NroSerie" class="control-label"></label>
+                <input asp-for="NroSerie" class="form-control" />
+                <span asp-validation-for="NroSerie" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Codigo" class="control-label"></label>
+                <input asp-for="Codigo" class="form-control" />
+                <span asp-validation-for="Codigo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FabricacionFecha" class="control-label"></label>
+                <input asp-for="FabricacionFecha" class="form-control" />
+                <span asp-validation-for="FabricacionFecha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CompraFecha" class="control-label"></label>
+                <input asp-for="CompraFecha" class="form-control" />
+                <span asp-validation-for="CompraFecha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VencimientoFecha" class="control-label"></label>
+                <input asp-for="VencimientoFecha" class="form-control" />
+                <span asp-validation-for="VencimientoFecha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Observaciones" class="control-label"></label>
+                <input asp-for="Observaciones" class="form-control" />
+                <span asp-validation-for="Observaciones" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Activo" /> @Html.DisplayNameFor(model => model.Activo)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="BajaFecha" class="control-label"></label>
+                <input asp-for="BajaFecha" class="form-control" />
+                <span asp-validation-for="BajaFecha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Estados" class="control-label"></label>
+                <select asp-for="Estados" class="form-control"></select>
+                <span asp-validation-for="Estados" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Titulars" class="control-label"></label>
+                <select asp-for="Titulars" class="form-control"></select>
+                <span asp-validation-for="Titulars" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
