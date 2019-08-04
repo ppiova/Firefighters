@@ -1,0 +1,25 @@
+﻿@model Firefighters.Web.Data.Entities.Area
+
+@{
+    ViewData["Title"] = "DETALLE";
+}
+
+<h1 >DETALLE</h1>
+
+<h4>Area</h4>
+<div>
+    
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AreaName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AreaName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Editar</a> |
+    <a asp-action="Index">Volver a la Lista</a>
+</div>
