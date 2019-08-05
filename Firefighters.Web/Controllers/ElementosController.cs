@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Firefighters.Web.Data;
+﻿using Firefighters.Web.Data;
 using Firefighters.Web.Data.Entities;
 using Firefighters.Web.Helpers;
 using Firefighters.Web.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Firefighters.Web.Controllers
 {
@@ -54,10 +51,10 @@ namespace Firefighters.Web.Controllers
         // GET: Elementos/Create
         public IActionResult Create(int? id)
         {
-            
+
             var view = new ElementoViewModel
             {
-               
+
                 Areas = _combosHelper.GetComboAreas(),
                 Ubicaciones = _combosHelper.GetComboUbicaciones(),
                 Estados = _combosHelper.GetComboEstadosElementos(),
