@@ -45,13 +45,13 @@
             <th>
                 @Html.DisplayNameFor(model => model.BajaFecha)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.Estados)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Titulars)
             </th>
-            <th></th>
+            <th></th>*@
         </tr>
     </thead>
     <tbody>
@@ -90,12 +90,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.BajaFecha)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Estados)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Titulars)
-            </td>
+            </td>*@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

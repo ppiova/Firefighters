@@ -7,16 +7,24 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Firefighters.Web.Data;
 using Firefighters.Web.Data.Entities;
+using Firefighters.Web.Helpers;
+using Firefighters.Web.Models;
 
 namespace Firefighters.Web.Controllers
 {
     public class ElementosController : Controller
     {
         private readonly DataContext _context;
+        private readonly ICombosHelper _combosHelper;
+        private readonly IConverterHelper _converterHelper;
 
-        public ElementosController(DataContext context)
+        public ElementosController(DataContext context,
+                                   ICombosHelper combosHelper,
+                                   IConverterHelper converterHelper)
         {
             _context = context;
+            _combosHelper = combosHelper;
+            _converterHelper = converterHelper;
         }
 
         // GET: Elementos
@@ -44,9 +52,20 @@ namespace Firefighters.Web.Controllers
         }
 
         // GET: Elementos/Create
-        public IActionResult Create()
+        public IActionResult Create(int? id)
         {
-            return View();
+            
+            var view = new ElementoViewModel
+            {
+               
+                Areas = _combosHelper.GetComboAreas(),
+                Ubicaciones = _combosHelper.GetComboUbicaciones(),
+                Estados = _combosHelper.GetComboEstadosElementos(),
+                Titulares = _combosHelper.GetComboTitulares(),
+                Activo = true
+            };
+
+            return View(view);
         }
 
         // POST: Elementos/Create
@@ -54,15 +73,15 @@ namespace Firefighters.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Elemento elemento)
+        public async Task<IActionResult> Create(ElementoViewModel view)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(elemento);
+                _context.Add(view);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(elemento);
+            return View(view);
         }
 
         // GET: Elementos/Edit/5
@@ -78,7 +97,8 @@ namespace Firefighters.Web.Controllers
             {
                 return NotFound();
             }
-            return View(elemento);
+            var view = _converterHelper.ToElementoViewModel(elemento);
+            return View(view);
         }
 
         // POST: Elementos/Edit/5

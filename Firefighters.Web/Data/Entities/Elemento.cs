@@ -14,7 +14,7 @@ namespace Firefighters.Web.Data.Entities
 
         [Display(Name = "Descripción")]
         [MaxLength(50, ErrorMessage = "La {0} no debe tener mas de {1} caracteres.")]
-        [Required(ErrorMessage = "Este campo {0} es obligatorio.")]
+        [Required(ErrorMessage = "La {0} es obligatorio.")]
         public string Descripcion { get; set; }
 
         [Display(Name = "Modelo")]
@@ -49,18 +49,18 @@ namespace Firefighters.Web.Data.Entities
         [MaxLength(500, ErrorMessage = "El {0} no debe tener mas de {1} caracteres.")]
         public string Observaciones { get; set; }
 
-        [Display(Name = "Activo")]
+        [Display(Name = "ACTIVO")]
         public bool Activo { get; set; }
 
         [Display(Name = "Fecha Baja")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? BajaFecha { get; set; }
 
+
         public Area Area { get; set; }
         public Ubicacion Ubicacion { get; set; }
-
-
-        public EnumAuxiliares.Estados Estados { get; set; }
-        public EnumAuxiliares.Titular Titulars { get; set; }
+        
+        public Int16 IdEstado { get; set; }
+        public Int16 IdTitular { get; set; }
     }
 }
