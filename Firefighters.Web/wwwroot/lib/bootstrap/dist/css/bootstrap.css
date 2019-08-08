@@ -4156,6 +4156,7 @@ input[type="button"].btn-block {
   -ms-flex-pack: justify;
   justify-content: space-between;
   padding: 0.5rem 1rem;
+  background-color:orangered;
 }
 
 .navbar > .container,
@@ -10007,6 +10008,7 @@ a.text-dark:hover, a.text-dark:focus {
   }
   .navbar {
     display: none;
+
   }
   .badge {
     border: 1px solid #000;
