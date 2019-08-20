@@ -12,10 +12,10 @@ namespace Firefighters.Web.Data
         }
 
         //Here save the Entities
-        //public DbSet<Owner> Owners { get; set; }
-
+      
         public DbSet<Area> Areas { get; set; }
         public DbSet<Elemento> Elementos { get; set; }
         public DbSet<Ubicacion> Ubicacions { get; set; }
+
     }
 }
