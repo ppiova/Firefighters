@@ -10,6 +10,7 @@ namespace Firefighters.Web.Helpers
 {
     public class ConverterHelper : IConverterHelper
     {
+        //Atributos privados para poder utilizarlos en toda la clase que no se me pierdan en el constructor
         private readonly DataContext _dataContext;
         private readonly ICombosHelper _combosHelper;
 
