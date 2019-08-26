@@ -60,19 +60,22 @@ namespace Firefighters.Web.Data
 
         private async Task CheckUbicaciones()
         {
-            _context.Ubicacions.Add(new Entities.Ubicacion { UbicacionElemento = "Guardia" });
-            _context.Ubicacions.Add(new Entities.Ubicacion { UbicacionElemento = "Depósito" });
-            _context.Ubicacions.Add(new Entities.Ubicacion { UbicacionElemento = "Vestuarios" });
-            _context.Ubicacions.Add(new Entities.Ubicacion { UbicacionElemento = "U11" });
-            _context.Ubicacions.Add(new Entities.Ubicacion { UbicacionElemento = "U14" });
-            _context.Ubicacions.Add(new Entities.Ubicacion { UbicacionElemento = "U16" });
-            _context.Ubicacions.Add(new Entities.Ubicacion { UbicacionElemento = "U18" });
-            _context.Ubicacions.Add(new Entities.Ubicacion { UbicacionElemento = "U19" });
-            _context.Ubicacions.Add(new Entities.Ubicacion { UbicacionElemento = "U20" });
-            _context.Ubicacions.Add(new Entities.Ubicacion { UbicacionElemento = "U21" });
-            _context.Ubicacions.Add(new Entities.Ubicacion { UbicacionElemento = "U21F" });
+            if (!_context.Ubicaciones.Any())
+            {
+                _context.Ubicaciones.Add(new Entities.Ubicacion { UbicacionElemento = "Guardia" });
+                _context.Ubicaciones.Add(new Entities.Ubicacion { UbicacionElemento = "Depósito" });
+                _context.Ubicaciones.Add(new Entities.Ubicacion { UbicacionElemento = "Vestuarios" });
+                _context.Ubicaciones.Add(new Entities.Ubicacion { UbicacionElemento = "U11" });
+                _context.Ubicaciones.Add(new Entities.Ubicacion { UbicacionElemento = "U14" });
+                _context.Ubicaciones.Add(new Entities.Ubicacion { UbicacionElemento = "U16" });
+                _context.Ubicaciones.Add(new Entities.Ubicacion { UbicacionElemento = "U18" });
+                _context.Ubicaciones.Add(new Entities.Ubicacion { UbicacionElemento = "U19" });
+                _context.Ubicaciones.Add(new Entities.Ubicacion { UbicacionElemento = "U20" });
+                _context.Ubicaciones.Add(new Entities.Ubicacion { UbicacionElemento = "U21" });
+                _context.Ubicaciones.Add(new Entities.Ubicacion { UbicacionElemento = "U21F" });
 
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
+            }
         }
 
         private async Task CheckRoles()

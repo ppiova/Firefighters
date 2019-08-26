@@ -2,7 +2,6 @@
 using Firefighters.Web.Data.Entities;
 using Firefighters.Web.Helpers;
 using Firefighters.Web.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -10,10 +9,9 @@ using System.Threading.Tasks;
 
 namespace Firefighters.Web.Controllers
 {
-    [Authorize(Roles = "Admin")]
     public class ElementosController : Controller
     {
-        private readonly DataContext _context;
+        private readonly DataContext _dataContext;
         private readonly ICombosHelper _combosHelper;
         private readonly IConverterHelper _converterHelper;
 
@@ -21,15 +19,18 @@ namespace Firefighters.Web.Controllers
                                    ICombosHelper combosHelper,
                                    IConverterHelper converterHelper)
         {
-            _context = context;
+            _dataContext = context;
             _combosHelper = combosHelper;
             _converterHelper = converterHelper;
         }
 
         // GET: Elementos
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Elementos.ToListAsync());
+            return View(_dataContext.Elementos
+                .Include(u => u.Ubicacion)
+                .Include(a => a.Area)
+             );
         }
 
         // GET: Elementos/Details/5
@@ -40,8 +41,8 @@ namespace Firefighters.Web.Controllers
                 return NotFound();
             }
 
-            var elemento = await _context.Elementos
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var elemento = await _dataContext.Elementos
+                .FirstOrDefaultAsync(m => m.ElementoID == id);
             if (elemento == null)
             {
                 return NotFound();
@@ -56,7 +57,6 @@ namespace Firefighters.Web.Controllers
 
             var view = new ElementoViewModel
             {
-
                 Areas = _combosHelper.GetComboAreas(),
                 Ubicaciones = _combosHelper.GetComboUbicaciones(),
                 Estados = _combosHelper.GetComboEstadosElementos(),
@@ -67,18 +67,20 @@ namespace Firefighters.Web.Controllers
             return View(view);
         }
 
-        // POST: Elementos/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ElementoViewModel view)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(view);
-                await _context.SaveChangesAsync();
+                var elemento = await _converterHelper.ToElementoAsync(view);
+
+                _dataContext.Elementos.Add(elemento);
+                await _dataContext.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+
+
+
             }
             return View(view);
         }
@@ -91,7 +93,11 @@ namespace Firefighters.Web.Controllers
                 return NotFound();
             }
 
-            var elemento = await _context.Elementos.FindAsync(id);
+            var elemento = await _dataContext.Elementos
+                .Include(e => e.Area)
+                .Include(e => e.Ubicacion)
+                .FirstOrDefaultAsync(e => e.ElementoID == id.Value);
+
             if (elemento == null)
             {
                 return NotFound();
@@ -100,28 +106,22 @@ namespace Firefighters.Web.Controllers
             return View(view);
         }
 
-        // POST: Elementos/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Elemento elemento)
+        public async Task<IActionResult> Edit(ElementoViewModel view)
         {
-            if (id != elemento.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(elemento);
-                    await _context.SaveChangesAsync();
+                try { 
+                        var elemento = await _converterHelper.ToElementoAsync(view);
+                         elemento.ElementoID = view.ElementoID;
+
+                        _dataContext.Elementos.Update(elemento);
+                        await _dataContext.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ElementoExists(elemento.Id))
+                    if (!ElementoExists(view.ElementoID))
                     {
                         return NotFound();
                     }
@@ -132,7 +132,8 @@ namespace Firefighters.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(elemento);
+
+            return View(view);
         }
 
         // GET: Elementos/Delete/5
@@ -143,8 +144,8 @@ namespace Firefighters.Web.Controllers
                 return NotFound();
             }
 
-            var elemento = await _context.Elementos
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var elemento = await _dataContext.Elementos
+                .FirstOrDefaultAsync(m => m.ElementoID == id);
             if (elemento == null)
             {
                 return NotFound();
@@ -158,15 +159,15 @@ namespace Firefighters.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var elemento = await _context.Elementos.FindAsync(id);
-            _context.Elementos.Remove(elemento);
-            await _context.SaveChangesAsync();
+            var elemento = await _dataContext.Elementos.FindAsync(id);
+            _dataContext.Elementos.Remove(elemento);
+            await _dataContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ElementoExists(int id)
         {
-            return _context.Elementos.Any(e => e.Id == id);
+            return _dataContext.Elementos.Any(e => e.ElementoID == id);
         }
     }
 }

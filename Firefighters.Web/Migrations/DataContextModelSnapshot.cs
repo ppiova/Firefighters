@@ -57,9 +57,9 @@ namespace Firefighters.Web.Migrations
 
                     b.Property<DateTime?>("FabricacionFecha");
 
-                    b.Property<short>("IdEstado");
+                    b.Property<short>("IdEstados");
 
-                    b.Property<short>("IdTitular");
+                    b.Property<short>("IdTitulares");
 
                     b.Property<string>("Marca")
                         .HasMaxLength(50);

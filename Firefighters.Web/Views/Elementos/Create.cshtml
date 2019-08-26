@@ -72,14 +72,14 @@
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label asp-for="IdEstados" class="control-label"></label>
-            <select asp-for="IdEstados" asp-items="Model.Estados" class="form-control"></select>
-            <span asp-validation-for="IdEstados" class="text-danger"></span>
+            <label asp-for="Estados" class="control-label"></label>
+            <select asp-for="IdEstado" asp-items="Model.Estados" class="form-control"></select>
+            <span asp-validation-for="IdEstado" class="text-danger"></span>
         </div>
         <div class="form-group col-md-6">
-            <label asp-for="IdTitulares" class="control-label"></label>
-            <select asp-for="IdTitulares" asp-items="Model.Titulares" class="form-control"></select>
-            <span asp-validation-for="IdTitulares" class="text-danger"></span>
+            <label asp-for="Titulares" class="control-label"></label>
+            <select asp-for="IdTitular" asp-items="Model.Titulares" class="form-control"></select>
+            <span asp-validation-for="IdTitular" class="text-danger"></span>
         </div>
     </div>
     <div class="form-row">
@@ -90,22 +90,11 @@
         </div>
     </div>
 
-   
-
-    @*<div id="fecha_baja" style="display: none;">
-        <div class="form-group form-check col-md-4">
-            <label class="form-check-label">
-                <input class="form-check-input" asp-for="Activo" /> @Html.DisplayNameFor(model => model.Activo)
-            </label>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <label asp-for="BajaFecha" class="control-label"></label>
-                <input asp-for="BajaFecha" class="form-control" />
-                <span asp-validation-for="BajaFecha" class="text-danger"></span>
-            </div>
-        </div>
-    </div>*@
+    <div class="form-group form-check col-md-4">
+        <label class="form-check-label">
+            <input class="form-check-input" asp-for="Activo" /> @Html.DisplayNameFor(model => model.Activo)
+        </label>
+    </div>
     <div class="form-group">
         <input type="submit" value="GUARDAR" class="btn btn-primary" />
     </div>
