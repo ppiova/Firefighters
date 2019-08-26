@@ -12,7 +12,7 @@ namespace Firefighters.Web.Data.Entities
 
         [Display(Name = "Nro. Ubicación")]
         [Required(ErrorMessage = "El campo {0} es Obligatorio.")]
-        public Int16 Id { get; set; }
+        public Int16 UbicacionID { get; set; }
 
         [Display(Name = "Ubcación")]
         [MaxLength(20, ErrorMessage = "El {0} campo no debe tener más de {1} caractéres.")]

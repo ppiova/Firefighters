@@ -1,14 +1,15 @@
-﻿using Firefighters.Web.Data;
-using Firefighters.Web.Data.Entities;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Firefighters.Web.Data;
+using Firefighters.Web.Data.Entities;
 
 namespace Firefighters.Web.Controllers
 {
-    [Authorize(Roles = "Admin")]
     public class UbicacionesController : Controller
     {
         private readonly DataContext _context;
@@ -21,7 +22,7 @@ namespace Firefighters.Web.Controllers
         // GET: Ubicaciones
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Ubicacions.ToListAsync());
+            return View(await _context.Ubicaciones.ToListAsync());
         }
 
         // GET: Ubicaciones/Details/5
@@ -32,8 +33,8 @@ namespace Firefighters.Web.Controllers
                 return NotFound();
             }
 
-            var ubicacion = await _context.Ubicacions
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var ubicacion = await _context.Ubicaciones
+                .FirstOrDefaultAsync(m => m.UbicacionID == id);
             if (ubicacion == null)
             {
                 return NotFound();
@@ -72,7 +73,7 @@ namespace Firefighters.Web.Controllers
                 return NotFound();
             }
 
-            var ubicacion = await _context.Ubicacions.FindAsync(id);
+            var ubicacion = await _context.Ubicaciones.FindAsync(id);
             if (ubicacion == null)
             {
                 return NotFound();
@@ -87,7 +88,7 @@ namespace Firefighters.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(short id, Ubicacion ubicacion)
         {
-            if (id != ubicacion.Id)
+            if (id != ubicacion.UbicacionID)
             {
                 return NotFound();
             }
@@ -101,7 +102,7 @@ namespace Firefighters.Web.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UbicacionExists(ubicacion.Id))
+                    if (!UbicacionExists(ubicacion.UbicacionID))
                     {
                         return NotFound();
                     }
@@ -123,8 +124,8 @@ namespace Firefighters.Web.Controllers
                 return NotFound();
             }
 
-            var ubicacion = await _context.Ubicacions
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var ubicacion = await _context.Ubicaciones
+                .FirstOrDefaultAsync(m => m.UbicacionID == id);
             if (ubicacion == null)
             {
                 return NotFound();
@@ -138,15 +139,15 @@ namespace Firefighters.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(short id)
         {
-            var ubicacion = await _context.Ubicacions.FindAsync(id);
-            _context.Ubicacions.Remove(ubicacion);
+            var ubicacion = await _context.Ubicaciones.FindAsync(id);
+            _context.Ubicaciones.Remove(ubicacion);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool UbicacionExists(short id)
         {
-            return _context.Ubicacions.Any(e => e.Id == id);
+            return _context.Ubicaciones.Any(e => e.UbicacionID == id);
         }
     }
 }

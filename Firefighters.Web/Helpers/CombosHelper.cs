@@ -54,7 +54,7 @@ namespace Firefighters.Web.Helpers
             var list = _dataContext.Areas.Select(p => new SelectListItem
             {
                 Text = p.AreaName,
-                Value = p.Id.ToString()
+                Value = p.AreaID.ToString()
             }).OrderBy(p => p.Text).ToList();
 
             list.Insert(0, new SelectListItem
@@ -68,10 +68,10 @@ namespace Firefighters.Web.Helpers
 
         public IEnumerable<SelectListItem> GetComboUbicaciones()
         {
-            var list = _dataContext.Ubicacions.Select(p => new SelectListItem
+            var list = _dataContext.Ubicaciones.Select(p => new SelectListItem
             {
                 Text = p.UbicacionElemento,
-                Value = p.Id.ToString()
+                Value = p.UbicacionID.ToString()
             }).OrderBy(p => p.Text).ToList();
 
             list.Insert(0, new SelectListItem

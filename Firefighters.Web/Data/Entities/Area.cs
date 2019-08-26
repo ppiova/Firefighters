@@ -12,7 +12,7 @@ namespace Firefighters.Web.Data.Entities
         [Display(Name = "Nro. Area")]
         [Range(0, Int16.MaxValue, ErrorMessage = "El {0} campo no debe tener más de {2} caractéres.")] 
         [Required(ErrorMessage = "El campo {0} es Obligatorio.")]
-        public Int16 Id { get; set; }
+        public Int16 AreaID { get; set; }
 
         [Display(Name = "Area")]
         [MaxLength(20, ErrorMessage = "El {0} campo no debe tener más de {1} caractéres.")]
@@ -20,7 +20,7 @@ namespace Firefighters.Web.Data.Entities
         public string AreaName { get; set; }
 
         ICollection<Area> Areas { get; set; }
-        ICollection<Ubicacion> Ubicacions { get; set; }
+        ICollection<Ubicacion> Ubicaciones { get; set; }
 
 
 

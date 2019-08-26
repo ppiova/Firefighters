@@ -1,14 +1,15 @@
-﻿using Firefighters.Web.Data;
-using Firefighters.Web.Data.Entities;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Firefighters.Web.Data;
+using Firefighters.Web.Data.Entities;
 
 namespace Firefighters.Web.Controllers
 {
-    [Authorize(Roles = "Admin")]
     public class AreasController : Controller
     {
         private readonly DataContext _context;
@@ -33,7 +34,7 @@ namespace Firefighters.Web.Controllers
             }
 
             var area = await _context.Areas
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.AreaID == id);
             if (area == null)
             {
                 return NotFound();
@@ -87,7 +88,7 @@ namespace Firefighters.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(short id, Area area)
         {
-            if (id != area.Id)
+            if (id != area.AreaID)
             {
                 return NotFound();
             }
@@ -101,7 +102,7 @@ namespace Firefighters.Web.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AreaExists(area.Id))
+                    if (!AreaExists(area.AreaID))
                     {
                         return NotFound();
                     }
@@ -124,7 +125,7 @@ namespace Firefighters.Web.Controllers
             }
 
             var area = await _context.Areas
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.AreaID == id);
             if (area == null)
             {
                 return NotFound();
@@ -146,7 +147,7 @@ namespace Firefighters.Web.Controllers
 
         private bool AreaExists(short id)
         {
-            return _context.Areas.Any(e => e.Id == id);
+            return _context.Areas.Any(e => e.AreaID == id);
         }
     }
 }
