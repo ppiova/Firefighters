@@ -9,7 +9,7 @@ namespace Firefighters.Web.Data.Entities
     public class Elemento
     {
         [Display(Name = "Nro. Elemento")]
-        [Required(ErrorMessage = "El campo {0} es Obligatorio.")]
+        //[Required(ErrorMessage = "El campo {0} es Obligatorio.")]
         public int ElementoID { get; set; }
 
         [Display(Name = "Descripción")]
