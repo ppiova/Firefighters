@@ -10,97 +10,24 @@
 
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="ElementoID" />
-    <div>
-        <div class="form-group">
-            <label asp-for="Descripcion" class="control-label"></label>
-            <input asp-for="Descripcion" class="form-control" />
-            <span asp-validation-for="Descripcion" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label asp-for="AreaId" class="control-label"></label>
-            <select asp-for="AreaId" asp-items="Model.Areas" class="form-control"></select>
-            <span asp-validation-for="AreaId" class="text-danger"></span>
-        </div>
 
-        <div class="form-group col-md-6 ">
-            <label asp-for="UbicacionId" class="control-label"></label>
-            <select asp-for="UbicacionId" asp-items="Model.Ubicaciones" class="form-control"></select>
-            <span asp-validation-for="UbicacionId" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-3">
-            <label asp-for="Modelo" class="control-label"></label>
-            <input asp-for="Modelo" class="form-control" />
-            <span asp-validation-for="Modelo" class="text-danger"></span>
-        </div>
-        <div class="form-group col-md-3">
-            <label asp-for="Marca" class="control-label"></label>
-            <input asp-for="Marca" class="form-control" />
-            <span asp-validation-for="Marca" class="text-danger"></span>
-        </div>
-        <div class="form-group col-md-3">
-            <label asp-for="NroSerie" class="control-label"></label>
-            <input asp-for="NroSerie" class="form-control" />
-            <span asp-validation-for="NroSerie" class="text-danger"></span>
-        </div>
-        <div class="form-group col-md-3">
-            <label asp-for="Codigo" class="control-label"></label>
-            <input asp-for="Codigo" class="form-control" />
-            <span asp-validation-for="Codigo" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-4">
-            <label asp-for="FabricacionFecha" class="control-label"></label>
-            <input asp-for="FabricacionFecha" class="form-control" />
-            <span asp-validation-for="FabricacionFecha" class="text-danger"></span>
-        </div>
-        <div class="form-group col-md-4">
-            <label asp-for="CompraFecha" class="control-label"></label>
-            <input asp-for="CompraFecha" class="form-control" />
-            <span asp-validation-for="CompraFecha" class="text-danger"></span>
-        </div>
-        <div class="form-group col-md-4">
-            <label asp-for="VencimientoFecha" class="control-label"></label>
-            <input asp-for="VencimientoFecha" class="form-control" />
-            <span asp-validation-for="VencimientoFecha" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label asp-for="Estados" class="control-label"></label>
-            <select asp-for="IdEstado" asp-items="Model.Estados" class="form-control"></select>
-            <span asp-validation-for="IdEstado" class="text-danger"></span>
-        </div>
-        <div class="form-group col-md-6">
-            <label asp-for="Titulares" class="control-label"></label>
-            <select asp-for="IdTitular" asp-items="Model.Titulares" class="form-control"></select>
-            <span asp-validation-for="IdTitular" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-12">
-            <label asp-for="Observaciones" class="control-label"></label>
-            <input asp-for="Observaciones" class="form-control" />
-            <span asp-validation-for="Observaciones" class="text-danger"></span>
-        </div>
-    </div>
+    <partial name="_Elemento" />
 
-    <div class="form-group form-check col-md-4">
-        <label class="form-check-label">
-            <input class="form-check-input" asp-for="Activo" onchange="return change_activo(); id=" esta_activo"" /> @Html.DisplayNameFor(model => model.Activo)
-        </label>
+    <div class="form-group">
+        <div class="checkbox">
+            <label>
+                <input asp-for="Activo" /> @Html.DisplayNameFor(model => model.Activo)
+            </label>
+        </div>
     </div>
-    <div id="fecha_baja" class="form-row" style="display: none;">
+    <div class="form-row">
         <div class="form-group col-md-4">
             <label asp-for="BajaFecha" class="control-label"></label>
             <input asp-for="BajaFecha" class="form-control" />
             <span asp-validation-for="BajaFecha" class="text-danger"></span>
         </div>
     </div>
+
     <div class="form-group">
         <input type="submit" value="GUARDAR" class="btn btn-primary" />
     </div>
@@ -113,14 +40,15 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-<script>
-       function  change_activo() {
-            if (document.getElementById('esta_activo').checked) {
-                //el checkbox esta activo
-                document.getElementById('fecha_baja').style = "display:none;";
-            } else {
-                //el checkbox esta inactivo
-                document.getElementById('fecha_baja').style = "display:' ';";
+<script type="text/javascript">
+    $(function () {
+        $("#Activo").click(function () {
+            if ($(this).is(':checked')) {
+                $("#BajaFecha").hide();
             }
-       }
+            else {
+                $("#BajaFecha").show();
+            }
+        });
+    });
 </script>

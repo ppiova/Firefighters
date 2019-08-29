@@ -69,20 +69,20 @@ namespace Firefighters.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ElementoViewModel view)
+        public async Task<IActionResult> Create(ElementoViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var elemento = await _converterHelper.ToElementoAsync(view);
+                var elemento = await _converterHelper.ToElementoAsync(model);
 
+                elemento.Activo = true;
                 _dataContext.Elementos.Add(elemento);
                 await _dataContext.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
 
-
-
             }
-            return View(view);
+
+            return View(model);
         }
 
         // GET: Elementos/Edit/5
@@ -108,20 +108,20 @@ namespace Firefighters.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(ElementoViewModel view)
+        public async Task<IActionResult> Edit(ElementoViewModel model)
         {
             if (ModelState.IsValid)
             {
                 try { 
-                        var elemento = await _converterHelper.ToElementoAsync(view);
-                         elemento.ElementoID = view.ElementoID;
+                        var elemento = await _converterHelper.ToElementoAsync(model);
+                         elemento.ElementoID = model.ElementoID;
 
                         _dataContext.Elementos.Update(elemento);
                         await _dataContext.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ElementoExists(view.ElementoID))
+                    if (!ElementoExists(model.ElementoID))
                     {
                         return NotFound();
                     }
@@ -132,8 +132,12 @@ namespace Firefighters.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            model.Areas = _combosHelper.GetComboAreas();
+            model.Ubicaciones = _combosHelper.GetComboUbicaciones();
+            model.Estados = _combosHelper.GetComboEstadosElementos();
+            model.Titulares = _combosHelper.GetComboTitulares();
 
-            return View(view);
+            return View(model);
         }
 
         // GET: Elementos/Delete/5

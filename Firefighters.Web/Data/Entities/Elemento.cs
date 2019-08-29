@@ -33,16 +33,20 @@ namespace Firefighters.Web.Data.Entities
         [MaxLength(50, ErrorMessage = "El {0} no debe tener mas de {1} caracteres.")]
         public string Codigo { get; set; }
 
+        //TODO: ver fechas formato
+        [DataType(DataType.Date)]
         [Display(Name = "Fecha Fabricación")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public DateTime? FabricacionFecha { get; set; }
 
+        [DataType(DataType.Date)]
         [Display(Name = "Fecha Compra")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public DateTime? CompraFecha { get; set; }
 
+        [DataType(DataType.Date)]
         [Display(Name = "Fecha Vencimiento")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public DateTime? VencimientoFecha { get; set; }
 
         [Display(Name = "Observaciones")]
