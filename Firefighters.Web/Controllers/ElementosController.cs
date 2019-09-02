@@ -42,6 +42,8 @@ namespace Firefighters.Web.Controllers
             }
 
             var elemento = await _dataContext.Elementos
+                .Include(u => u.Ubicacion)
+                .Include(a => a.Area)
                 .FirstOrDefaultAsync(m => m.ElementoID == id);
             if (elemento == null)
             {
@@ -73,7 +75,7 @@ namespace Firefighters.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var elemento = await _converterHelper.ToElementoAsync(model);
+                var elemento = await _converterHelper.ToElementoAsync(model, true);
 
                 elemento.Activo = true;
                 _dataContext.Elementos.Add(elemento);
@@ -113,7 +115,7 @@ namespace Firefighters.Web.Controllers
             if (ModelState.IsValid)
             {
                 try { 
-                        var elemento = await _converterHelper.ToElementoAsync(model);
+                        var elemento = await _converterHelper.ToElementoAsync(model, false);
                          elemento.ElementoID = model.ElementoID;
 
                         _dataContext.Elementos.Update(elemento);

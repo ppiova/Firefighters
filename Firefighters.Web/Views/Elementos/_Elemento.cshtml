@@ -45,8 +45,9 @@
 <div class="form-row">
     <div class="form-group col-md-4">
         <label asp-for="FabricacionFecha" class="control-label"></label>
-        <input asp-for="FabricacionFecha" class="form-control" />
+        <input asp-for="FabricacionFecha" class="form-control"/>
         <span asp-validation-for="FabricacionFecha" class="text-danger"></span>
+      
     </div>
     <div class="form-group col-md-4">
         <label asp-for="CompraFecha" class="control-label"></label>
@@ -61,14 +62,14 @@
 </div>
 <div class="form-row">
     <div class="form-group col-md-6">
-        <label asp-for="Estados" class="control-label"></label>
-        <select asp-for="IdEstado" asp-items="Model.Estados" class="form-control"></select>
-        <span asp-validation-for="IdEstado" class="text-danger"></span>
+        <label asp-for="Estado" class="control-label"></label>
+        <select asp-for="Estado" asp-items="Model.Estados" class="form-control"></select>
+        <span asp-validation-for="Estado" class="text-danger"></span>
     </div>
     <div class="form-group col-md-6">
-        <label asp-for="Titulares" class="control-label"></label>
-        <select asp-for="IdTitular" asp-items="Model.Titulares" class="form-control"></select>
-        <span asp-validation-for="IdTitular" class="text-danger"></span>
+        <label asp-for="Titular" class="control-label"></label>
+        <select asp-for="Titular" asp-items="Model.Titulares" class="form-control"></select>
+        <span asp-validation-for="Titular" class="text-danger"></span>
     </div>
 </div>
 <div class="form-row">
@@ -78,3 +79,4 @@
         <span asp-validation-for="Observaciones" class="text-danger"></span>
     </div>
 </div>
+
