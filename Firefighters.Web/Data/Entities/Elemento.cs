@@ -67,11 +67,6 @@ namespace Firefighters.Web.Data.Entities
         public Estado? Estado { get; set; }
         public Titular? Titular { get; set; }
 
-
-        //public Int16 IdEstado { get; set; }
-        //public Int16 IdTitular { get; set; }
-
-
     }
   
 }

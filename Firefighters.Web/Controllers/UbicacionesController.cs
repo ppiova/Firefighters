@@ -22,7 +22,7 @@ namespace Firefighters.Web.Controllers
         // GET: Ubicaciones
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Ubicaciones.ToListAsync());
+            return View(await _context.Ubicaciones.OrderBy(a => a.UbicacionElemento).ToListAsync());
         }
 
         // GET: Ubicaciones/Details/5
@@ -137,9 +137,28 @@ namespace Firefighters.Web.Controllers
         // POST: Ubicaciones/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(short id)
+        public async Task<IActionResult> DeleteConfirmed(short ?id)
         {
-            var ubicacion = await _context.Ubicaciones.FindAsync(id);
+            if (id == null)
+            {
+                return NotFound();
+            }
+                       
+            var ubicacion = await _context.Ubicaciones
+                .Include(e => e.Elementos)
+                .FirstOrDefaultAsync(u => u.UbicacionID == id);
+
+            if (ubicacion == null)
+            {
+                return NotFound();
+            }
+            if (ubicacion.Elementos.Count > 0)
+            {
+                ModelState.AddModelError(string.Empty, "LA UBICACION NO SE PUEDE ELIMINAR. SE ENCUENTRA ASIGANADA A ELEMENTOS.");
+                return View(ubicacion);
+            }
+
+
             _context.Ubicaciones.Remove(ubicacion);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
