@@ -1,4 +1,5 @@
 ﻿using Firefighters.Web.Data;
+using Firefighters.Web.Data.Entities;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
@@ -19,34 +20,34 @@ namespace Firefighters.Web.Helpers
 
         public IEnumerable<SelectListItem> GetComboEstadosElementos()
         {
-            var list = new List<SelectListItem>
+            var estadosList = new List<SelectListItem>();
+            foreach (Estado eVal in Enum.GetValues(typeof(Estado)))
             {
-                new SelectListItem { Value = "0", Text = "(Seleccione un Estado...)" },
-                new SelectListItem { Value = "1", Text = "SinEstado" },
-                new SelectListItem { Value = "2", Text = "Bueno" },
-                new SelectListItem { Value = "3", Text = "Malo" },
-                new SelectListItem { Value = "4", Text = "MuyBueno" },
-                new SelectListItem { Value = "5", Text = "Regular" },
-                new SelectListItem { Value = "6", Text = "SinUso" }
+                estadosList.Add(new SelectListItem { Text = Enum.GetName(typeof(Estado), eVal), Value = eVal.ToString()});
+            }
+            estadosList.Insert(0, new SelectListItem
+            {
+                Text = "(Seleccione un Estado...)",
+                Value = "0"
+            });
 
-            };
-
-            return list;
+            return estadosList;
         }
 
         public IEnumerable<SelectListItem> GetComboTitulares()
         {
-            var list = new List<SelectListItem>
+            var titularesList = new List<SelectListItem>();
+            foreach (Titular eVal in Enum.GetValues(typeof(Titular)))
             {
-                new SelectListItem { Value = "0", Text = "(Seleccione un Titular...)" },
-                new SelectListItem { Value = "1", Text = "S" },
-                new SelectListItem { Value = "2", Text = "F" },
-                new SelectListItem { Value = "3", Text = "PC" }
+                titularesList.Add(new SelectListItem { Text = Enum.GetName(typeof(Titular), eVal), Value = eVal.ToString() });
+            }
+            titularesList.Insert(0, new SelectListItem
+            {
+                Text = "(Seleccione un Titular...)",
+                Value = "0"
+            });
 
-
-            };
-
-            return list;
+            return titularesList;
         }
 
         public IEnumerable<SelectListItem> GetComboAreas()
