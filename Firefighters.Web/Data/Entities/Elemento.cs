@@ -36,17 +36,17 @@ namespace Firefighters.Web.Data.Entities
         //TODO: ver fechas formato
         [DataType(DataType.Date)]
         [Display(Name = "Fecha Fabricación")]
-        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
+        //[DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]
         public DateTime? FabricacionFecha { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Fecha Compra")]
-        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
+        //[DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime? CompraFecha { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Fecha Vencimiento")]
-        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
+        //[DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime? VencimientoFecha { get; set; }
 
         [Display(Name = "Observaciones")]
@@ -57,17 +57,18 @@ namespace Firefighters.Web.Data.Entities
         public bool Activo { get; set; }
 
         [Display(Name = "Fecha Baja")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        //[DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime? BajaFecha { get; set; }
 
 
         public Area Area { get; set; }
         public Ubicacion Ubicacion { get; set; }
 
-        
-        public Int16 IdEstado { get; set; }
-        public Int16 IdTitular { get; set; }
+        public Estado? Estado { get; set; }
+        public Titular? Titular { get; set; }
 
+        public ICollection<ElementoImage> ElementoImages { get; set; }
 
     }
+  
 }

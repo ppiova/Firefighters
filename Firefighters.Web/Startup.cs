@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -31,8 +32,12 @@ namespace Firefighters.Web
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-                     
-           
+
+            //services.Configure<RequestLocalizationOptions>(options =>
+            //{
+            //    options.DefaultRequestCulture = new RequestCulture("es-ES");
+            //});
+
             services.AddIdentity<User, IdentityRole>(cfg =>
             {
                 //cfg.Tokens.AuthenticatorTokenProvider = TokenOptions.DefaultAuthenticatorProvider;
@@ -82,7 +87,8 @@ namespace Firefighters.Web
             //Se agrega para utilizar Identity User
             app.UseAuthentication();
             app.UseCookiePolicy();
-
+            ////Se usa para cambiar la cultura en el services
+            //app.UseRequestLocalization();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

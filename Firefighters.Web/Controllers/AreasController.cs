@@ -23,6 +23,7 @@ namespace Firefighters.Web.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.Areas.OrderBy(a => a.AreaName).ToListAsync());
+           
         }
 
         // GET: Areas/Details/5 
@@ -137,9 +138,26 @@ namespace Firefighters.Web.Controllers
         // POST: Areas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(short id)
+        public async Task<IActionResult> DeleteConfirmed(short ?id)
         {
-            var area = await _context.Areas.FindAsync(id);
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var area = await _context.Areas
+               .Include(e => e.Elementos)
+               .FirstOrDefaultAsync(a => a.AreaID == id);
+
+            if (area == null)
+            {
+                return NotFound();
+            }
+            if (area.Elementos.Count > 0)
+            {
+                ModelState.AddModelError(string.Empty, "LA AREA NO SE PUEDE ELIMINAR. SE ENCUENTRA ASIGANADA A ELEMENTOS.");
+                return View(area);
+            }
+
             _context.Areas.Remove(area);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

@@ -1,9 +1,6 @@
 ﻿using Firefighters.Web.Data;
 using Firefighters.Web.Data.Entities;
 using Firefighters.Web.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Firefighters.Web.Helpers
@@ -20,12 +17,13 @@ namespace Firefighters.Web.Helpers
             _combosHelper = combosHelper;
         }
 
-          
 
-        public async Task<Elemento> ToElementoAsync(ElementoViewModel view)
+
+        public async Task<Elemento> ToElementoAsync(ElementoViewModel view, bool isNew)
         {
             return new Elemento
             {
+                ElementoID = isNew ? 0 : view.ElementoID,
                 Descripcion = view.Descripcion,
                 Modelo = view.Modelo,
                 Marca = view.Marca,
@@ -37,9 +35,8 @@ namespace Firefighters.Web.Helpers
                 Observaciones = view.Observaciones,
                 Activo = view.Activo,
                 BajaFecha = view.BajaFecha,
-
-                IdEstado = view.IdEstado,
-                IdTitular = view.IdTitular,
+                Estado = view.Estado,
+                Titular = view.Titular,
                 Area = await _dataContext.Areas.FindAsync(view.AreaId),
                 Ubicacion = await _dataContext.Ubicaciones.FindAsync(view.UbicacionId)
 
@@ -47,6 +44,7 @@ namespace Firefighters.Web.Helpers
 
             };
         }
+              
 
         public ElementoViewModel ToElementoViewModel(Elemento elemento)
         {
@@ -65,9 +63,9 @@ namespace Firefighters.Web.Helpers
                 Activo = elemento.Activo,
                 BajaFecha = elemento.BajaFecha,
 
-                IdEstado = elemento.IdEstado,
+                Estado = elemento.Estado,
                 Estados = _combosHelper.GetComboEstadosElementos(),
-                IdTitular = elemento.IdTitular,
+                Titular = elemento.Titular,
                 Titulares = _combosHelper.GetComboTitulares(),
 
                 Areas = _combosHelper.GetComboAreas(),

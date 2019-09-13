@@ -25,6 +25,7 @@ namespace Firefighters.Web.Data.Entities
         ICollection<Area> Areas { get; set; }
         ICollection<Ubicacion> Ubicaciones { get; set; }
 
+        public ICollection<Elemento> Elementos { get; set; }
 
 
     }

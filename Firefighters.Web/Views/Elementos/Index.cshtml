@@ -4,10 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+    <h2 class="text-center">ELEMENTOS</h2>
 @*TODO: ACOMODAR TABLA*@
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Crear Elemento</a>
 </p>
 <table class="table">
     <thead>
@@ -36,23 +36,26 @@
             <th>
                 @Html.DisplayNameFor(model => model.VencimientoFecha)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Observaciones)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Activo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BajaFecha)
-            </th>
-            <th>
-            @Html.DisplayNameFor(model => model.Area.AreaName)
+            @*<th>
+            @Html.DisplayNameFor(model => model.Observaciones)
+        </th>*@
+            @*<th>
+            @Html.DisplayNameFor(model => model.Activo)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Ubicacion.UbicacionElemento)
-        </th>
-        <th></th>
-          
+            @Html.DisplayNameFor(model => model.BajaFecha)
+        </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Area.AreaName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ubicacion.UbicacionElemento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th></th>
+
         </tr>
     </thead>
     <tbody>
@@ -74,23 +77,26 @@
                 @Html.DisplayFor(modelItem => item.Codigo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FabricacionFecha)
+                @*@Html.DisplayFor(modelItem => item.FabricacionFecha)*@
+                @item.FabricacionFecha?.ToString("dd/MM/yyyy")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CompraFecha)
+                @*@Html.DisplayFor(modelItem => item.CompraFecha)*@
+                @item.CompraFecha?.ToString("dd/MM/yyyy")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.VencimientoFecha)
+                @*@Html.DisplayFor(modelItem => item.VencimientoFecha)*@
+                @item.VencimientoFecha?.ToString("dd/MM/yyyy")
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Observaciones)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Activo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BajaFecha)
-            </td>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.Observaciones)
+        </td>*@
+            @*<td>
+            @Html.DisplayFor(modelItem => item.Activo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BajaFecha)
+        </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Area.AreaName)
             </td>
@@ -98,9 +104,12 @@
                 @Html.DisplayFor(modelItem => item.Ubicacion.UbicacionElemento)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ElementoID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ElementoID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ElementoID">Delete</a>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ElementoID">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.ElementoID">Detalle</a> |
+                <a asp-action="Delete" asp-route-id="@item.ElementoID">Eliminar</a>
             </td>
         </tr>
 }

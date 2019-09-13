@@ -6,8 +6,9 @@ namespace Firefighters.Web.Helpers
 {
     public interface IConverterHelper
     {
-        Task<Elemento> ToElementoAsync(ElementoViewModel view);
-
+        //convert ElementoVM to Elemento
+        Task<Elemento> ToElementoAsync(ElementoViewModel view, bool isNew);
+        //convert Elemento to ElementoVM
         ElementoViewModel ToElementoViewModel(Elemento elemento);
 
     }
