@@ -19,6 +19,9 @@ namespace Firefighters.Web.Data.Entities
         [Required(ErrorMessage = "El campo {0} es Obligatorio.")]
         public string AreaName { get; set; }
 
+        [Display(Name = "Lleva Inventario")]
+        public bool LlevaInventario { get; set; }
+
         ICollection<Area> Areas { get; set; }
         ICollection<Ubicacion> Ubicaciones { get; set; }
 

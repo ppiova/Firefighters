@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,7 +22,7 @@ namespace Firefighters.Web.Controllers
         // GET: Ubicaciones
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Ubicaciones.ToListAsync());
+            return View(await _context.Ubicaciones.OrderBy(u => u.UbicacionElemento).ToListAsync());
         }
 
         // GET: Ubicaciones/Details/5

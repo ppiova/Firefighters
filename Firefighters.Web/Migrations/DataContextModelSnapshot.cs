@@ -21,7 +21,7 @@ namespace Firefighters.Web.Migrations
 
             modelBuilder.Entity("Firefighters.Web.Data.Entities.Area", b =>
                 {
-                    b.Property<short>("Id")
+                    b.Property<short>("AreaID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -29,20 +29,22 @@ namespace Firefighters.Web.Migrations
                         .IsRequired()
                         .HasMaxLength(20);
 
-                    b.HasKey("Id");
+                    b.Property<bool>("LlevaInventario");
+
+                    b.HasKey("AreaID");
 
                     b.ToTable("Areas");
                 });
 
             modelBuilder.Entity("Firefighters.Web.Data.Entities.Elemento", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ElementoID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("Activo");
 
-                    b.Property<short?>("AreaId");
+                    b.Property<short?>("AreaID");
 
                     b.Property<DateTime?>("BajaFecha");
 
@@ -57,9 +59,9 @@ namespace Firefighters.Web.Migrations
 
                     b.Property<DateTime?>("FabricacionFecha");
 
-                    b.Property<short>("IdEstados");
+                    b.Property<short>("IdEstado");
 
-                    b.Property<short>("IdTitulares");
+                    b.Property<short>("IdTitular");
 
                     b.Property<string>("Marca")
                         .HasMaxLength(50);
@@ -73,22 +75,22 @@ namespace Firefighters.Web.Migrations
                     b.Property<string>("Observaciones")
                         .HasMaxLength(500);
 
-                    b.Property<short?>("UbicacionId");
+                    b.Property<short?>("UbicacionID");
 
                     b.Property<DateTime?>("VencimientoFecha");
 
-                    b.HasKey("Id");
+                    b.HasKey("ElementoID");
 
-                    b.HasIndex("AreaId");
+                    b.HasIndex("AreaID");
 
-                    b.HasIndex("UbicacionId");
+                    b.HasIndex("UbicacionID");
 
                     b.ToTable("Elementos");
                 });
 
             modelBuilder.Entity("Firefighters.Web.Data.Entities.Ubicacion", b =>
                 {
-                    b.Property<short>("Id")
+                    b.Property<short>("UbicacionID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -96,9 +98,9 @@ namespace Firefighters.Web.Migrations
                         .IsRequired()
                         .HasMaxLength(20);
 
-                    b.HasKey("Id");
+                    b.HasKey("UbicacionID");
 
-                    b.ToTable("Ubicacions");
+                    b.ToTable("Ubicaciones");
                 });
 
             modelBuilder.Entity("Firefighters.Web.Data.Entities.User", b =>
@@ -281,11 +283,11 @@ namespace Firefighters.Web.Migrations
                 {
                     b.HasOne("Firefighters.Web.Data.Entities.Area", "Area")
                         .WithMany()
-                        .HasForeignKey("AreaId");
+                        .HasForeignKey("AreaID");
 
                     b.HasOne("Firefighters.Web.Data.Entities.Ubicacion", "Ubicacion")
                         .WithMany()
-                        .HasForeignKey("UbicacionId");
+                        .HasForeignKey("UbicacionID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

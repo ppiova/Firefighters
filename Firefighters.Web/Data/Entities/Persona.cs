@@ -41,11 +41,11 @@ namespace Firefighters.Web.Data.Entities
         public int? LocalidadID { get; set; }
 
         [Display(Name = "Tel. Particular")]
-        [MaxLength(100, ErrorMessage = "El {0} campo no puede tener más de {1} caracteres.")]
+        [MaxLength(50, ErrorMessage = "El {0} campo no puede tener más de {1} caracteres.")]
         public string TelParticular { get; set; }
 
         [Display(Name = "Tel. Celular")]
-        [MaxLength(100, ErrorMessage = "El {0} campo no puede tener más de {1} caracteres.")]
+        [MaxLength(50, ErrorMessage = "El {0} campo no puede tener más de {1} caracteres.")]
         public string TelCelular { get; set; }
 
         [Display(Name = "Grupo Sanguineo")]
@@ -80,7 +80,7 @@ namespace Firefighters.Web.Data.Entities
         public Int16 ?ProfesionID { get; set; }
 
         [Display(Name = "Tel. Trabajo")]
-        [MaxLength(100, ErrorMessage = "El {0} campo no puede tener más de {1} caracteres.")]
+        [MaxLength(50, ErrorMessage = "El {0} campo no puede tener más de {1} caracteres.")]
         public string TelTrabajo { get; set; }
     }
 }

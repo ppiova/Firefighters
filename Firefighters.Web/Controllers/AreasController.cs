@@ -22,10 +22,10 @@ namespace Firefighters.Web.Controllers
         // GET: Areas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Areas.ToListAsync());
+            return View(await _context.Areas.OrderBy(a => a.AreaName).ToListAsync());
         }
 
-        // GET: Areas/Details/5
+        // GET: Areas/Details/5 
         public async Task<IActionResult> Details(short? id)
         {
             if (id == null)

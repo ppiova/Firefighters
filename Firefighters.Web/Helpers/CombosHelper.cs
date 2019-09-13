@@ -39,9 +39,9 @@ namespace Firefighters.Web.Helpers
             var list = new List<SelectListItem>
             {
                 new SelectListItem { Value = "0", Text = "(Seleccione un Titular...)" },
-                new SelectListItem { Value = "1", Text = "S" },
-                new SelectListItem { Value = "2", Text = "F" },
-                new SelectListItem { Value = "3", Text = "PC" }
+                new SelectListItem { Value = "1", Text = "Sunchales" },
+                new SelectListItem { Value = "2", Text = "Federación Sta Fe" },
+                new SelectListItem { Value = "3", Text = "Protección Civil" }
 
 
             };
