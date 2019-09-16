@@ -14,14 +14,17 @@ namespace Firefighters.Web.Controllers
         private readonly DataContext _dataContext;
         private readonly ICombosHelper _combosHelper;
         private readonly IConverterHelper _converterHelper;
+        private readonly IImageHelper _imageHelper;
 
         public ElementosController(DataContext context,
                                    ICombosHelper combosHelper,
-                                   IConverterHelper converterHelper)
+                                   IConverterHelper converterHelper,
+                                   IImageHelper imageHelper)
         {
             _dataContext = context;
             _combosHelper = combosHelper;
             _converterHelper = converterHelper;
+            _imageHelper = imageHelper;
         }
 
         // GET: Elementos
@@ -30,6 +33,7 @@ namespace Firefighters.Web.Controllers
             return View(_dataContext.Elementos
                 .Include(u => u.Ubicacion)
                 .Include(a => a.Area)
+                .Include(i => i.ElementoImages)
              );
         }
 
@@ -44,6 +48,7 @@ namespace Firefighters.Web.Controllers
             var elemento = await _dataContext.Elementos
                 .Include(u => u.Ubicacion)
                 .Include(a => a.Area)
+                .Include(i => i.ElementoImages)
                 .FirstOrDefaultAsync(m => m.ElementoID == id);
             if (elemento == null)
             {
@@ -175,5 +180,78 @@ namespace Firefighters.Web.Controllers
         {
             return _dataContext.Elementos.Any(e => e.ElementoID == id);
         }
+
+        public async Task<IActionResult> AddImage(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var elemento = await _dataContext.Elementos.FindAsync(id.Value);
+            if (elemento == null)
+            {
+                return NotFound();
+            }
+
+            var model = new ElementoImageViewModel
+            {
+                ElementoImageId = elemento.ElementoID
+                
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddImage(ElementoImageViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var path = string.Empty;
+
+                if (model.ImageFile != null)
+                {
+                    path = await _imageHelper.UploadImageAsync(model.ImageFile);
+                }
+
+                var elementoImage = new ElementoImage
+                {
+                    ImageUrl = path,
+                    Elemento = await _dataContext.Elementos.FindAsync(model.ElementoImageId)
+                };
+
+                _dataContext.ElementoImages.Add(elementoImage);
+                await _dataContext.SaveChangesAsync();
+                //return RedirectToAction($"{nameof(Details)}/{model.ElementoImageId}");
+                return RedirectToAction("Details", "Elementos", new { @id = elementoImage.Elemento.ElementoID });
+
+            }
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> DeleteImage(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var elementoImage = await _dataContext.ElementoImages
+                .Include(e => e.Elemento)
+                .FirstOrDefaultAsync(e => e.ElementoImageId == id.Value);
+            if (elementoImage == null)
+            {
+                return NotFound();
+            }
+
+            _dataContext.ElementoImages.Remove(elementoImage);
+            await _dataContext.SaveChangesAsync();
+
+            //return RedirectToAction($"{nameof(Details)}/{elementoImage.Elemento.ElementoID}");
+            return RedirectToAction("Details", "Elementos", new { @id = elementoImage.Elemento.ElementoID });
+        }
+
     }
 }

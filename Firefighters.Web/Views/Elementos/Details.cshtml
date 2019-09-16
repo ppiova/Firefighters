@@ -110,5 +110,81 @@
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.ElementoID">Editar</a> |
+    <a asp-action="AddImage" asp-route-id="@Model.ElementoID">Agregar Imagen</a> |
     <a asp-action="Index">Volver a la Lista</a>
 </div>
+
+<div class="row">
+    <div class="col-md-3">
+        <div>
+            <h4>Imagenes</h4>
+            @if (Model.ElementoImages.Count == 0)
+            {
+                <h5>No Tiene Fotos Cargadas</h5>
+            }
+            else
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ElementoImages.FirstOrDefault().ImageUrl)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ElementoImages)
+                        {
+                            <tr>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(item.ImageUrl))
+                                    {
+                                        <img src="@Url.Content(item.ImageUrl)" alt="Image" style="width:200px;height:200px;max-width: 100%; height: auto;" />
+                                    }
+                                </td>
+                                <td>
+                                    <button data-id="@item.ElementoImageId" class="btn btn-danger deleteImage" data-toggle="modal" data-target="#deleteDialog">Eliminar</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+
+</div>
+
+<partial name="_DeleteDialog" />
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Delete item
+            var item_to_delete;
+            var action_to_delete;
+
+            $('.deleteImage').click((e) => {
+                item_to_delete = e.currentTarget.dataset.id;
+                action_to_delete = 1;
+            });
+
+            $('.deleteComprobante').click((e) => {
+                item_to_delete = e.currentTarget.dataset.id;
+                action_to_delete = 2;
+            });
+
+            $("#btnYesDelete").click(function () {
+                if (action_to_delete == 1) {
+                    window.location.href = '/Elementos/DeleteImage/' + item_to_delete;
+                } else {
+                    window.location.href = '/Elementos/DeleteComprobante/' + item_to_delete;
+                }
+            });
+        });
+    </script>
+
+}

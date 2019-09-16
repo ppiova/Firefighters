@@ -329,3 +329,4 @@ ASALocalRun/
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
 /Firefighters.Web/Migrations
+/Firefighters.Web/wwwroot/images/Elementos

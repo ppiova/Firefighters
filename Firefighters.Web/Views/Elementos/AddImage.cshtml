@@ -1,0 +1,29 @@
+﻿@model Firefighters.Web.Models.ElementoImageViewModel
+
+@{
+    ViewData["Title"] = "Agregar Imagen";
+}
+
+<h3>Agregar Imagen</h3>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddImage" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ElementoImageId" />
+
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" class="form-control" type="file" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Details" asp-route-id="@Model.ElementoImageId" >Volver al Elemento</a>
+            </div>
+        </form>
+    </div>
+</div>

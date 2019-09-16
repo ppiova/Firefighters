@@ -22,7 +22,9 @@ namespace Firefighters.Web.Controllers
         // GET: Ubicaciones
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Ubicaciones.OrderBy(a => a.UbicacionElemento).ToListAsync());
+
+            return View(await _context.Ubicaciones.OrderBy(u => u.UbicacionElemento).ToListAsync());
+
         }
 
         // GET: Ubicaciones/Details/5

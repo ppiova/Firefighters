@@ -33,10 +33,7 @@ namespace Firefighters.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            //services.Configure<RequestLocalizationOptions>(options =>
-            //{
-            //    options.DefaultRequestCulture = new RequestCulture("es-ES");
-            //});
+           
 
             services.AddIdentity<User, IdentityRole>(cfg =>
             {
@@ -64,9 +61,11 @@ namespace Firefighters.Web
             services.AddScoped<IUserHelper, UserHelper>();
             services.AddScoped<ICombosHelper, CombosHelper>();
             services.AddScoped<IConverterHelper, ConverterHelper>();
+            services.AddScoped<IImageHelper, ImageHelper>();
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+           
         }
 
 
@@ -82,6 +81,7 @@ namespace Firefighters.Web
                 app.UseHsts();
             }
 
+            app.UseStatusCodePagesWithReExecute("/error/{0}");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             //Se agrega para utilizar Identity User

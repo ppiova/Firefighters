@@ -57,11 +57,9 @@ namespace Firefighters.Web.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
+                    b.Property<int?>("Estado");
+
                     b.Property<DateTime?>("FabricacionFecha");
-
-                    b.Property<short>("IdEstado");
-
-                    b.Property<short>("IdTitular");
 
                     b.Property<string>("Marca")
                         .HasMaxLength(50);
@@ -75,6 +73,8 @@ namespace Firefighters.Web.Migrations
                     b.Property<string>("Observaciones")
                         .HasMaxLength(500);
 
+                    b.Property<int?>("Titular");
+
                     b.Property<short?>("UbicacionID");
 
                     b.Property<DateTime?>("VencimientoFecha");
@@ -86,6 +86,23 @@ namespace Firefighters.Web.Migrations
                     b.HasIndex("UbicacionID");
 
                     b.ToTable("Elementos");
+                });
+
+            modelBuilder.Entity("Firefighters.Web.Data.Entities.ElementoImage", b =>
+                {
+                    b.Property<int>("ElementoImageId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ElementoID");
+
+                    b.Property<string>("ImageUrl");
+
+                    b.HasKey("ElementoImageId");
+
+                    b.HasIndex("ElementoID");
+
+                    b.ToTable("ElementoImages");
                 });
 
             modelBuilder.Entity("Firefighters.Web.Data.Entities.Ubicacion", b =>
@@ -282,12 +299,19 @@ namespace Firefighters.Web.Migrations
             modelBuilder.Entity("Firefighters.Web.Data.Entities.Elemento", b =>
                 {
                     b.HasOne("Firefighters.Web.Data.Entities.Area", "Area")
-                        .WithMany()
+                        .WithMany("Elementos")
                         .HasForeignKey("AreaID");
 
                     b.HasOne("Firefighters.Web.Data.Entities.Ubicacion", "Ubicacion")
-                        .WithMany()
+                        .WithMany("Elementos")
                         .HasForeignKey("UbicacionID");
+                });
+
+            modelBuilder.Entity("Firefighters.Web.Data.Entities.ElementoImage", b =>
+                {
+                    b.HasOne("Firefighters.Web.Data.Entities.Elemento", "Elemento")
+                        .WithMany("ElementoImages")
+                        .HasForeignKey("ElementoID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

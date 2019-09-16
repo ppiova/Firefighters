@@ -25,7 +25,8 @@
 
 
   <ItemGroup>
-    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\images\Elementos\" />
+    <Folder Include="wwwroot\images\Personas\" />
   </ItemGroup>
 
 
