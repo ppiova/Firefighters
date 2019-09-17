@@ -6,7 +6,7 @@ namespace Firefighters.Web.Data.Entities
     {
         public int ElementoImageId { get; set; }
 
-        [Display(Name = "Image")]
+        [Display(Name = "Imagen")]
         public string ImageUrl { get; set; }
 
         // TODO: Change the path when publish

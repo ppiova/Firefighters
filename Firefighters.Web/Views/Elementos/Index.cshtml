@@ -15,9 +15,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Descripcion)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.Modelo)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Marca)
             </th>
@@ -27,12 +27,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Codigo)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.FabricacionFecha)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CompraFecha)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.VencimientoFecha)
             </th>
@@ -64,9 +64,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Descripcion)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Modelo)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Marca)
             </td>
@@ -76,16 +76,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Codigo)
             </td>
-            <td>
-                @*@Html.DisplayFor(modelItem => item.FabricacionFecha)*@
+            @*<td>              
                 @item.FabricacionFecha?.ToString("dd/MM/yyyy")
-            </td>
-            <td>
-                @*@Html.DisplayFor(modelItem => item.CompraFecha)*@
+            </td>*@
+            @*<td>
+               
                 @item.CompraFecha?.ToString("dd/MM/yyyy")
-            </td>
+            </td>*@
             <td>
-                @*@Html.DisplayFor(modelItem => item.VencimientoFecha)*@
                 @item.VencimientoFecha?.ToString("dd/MM/yyyy")
             </td>
             @*<td>

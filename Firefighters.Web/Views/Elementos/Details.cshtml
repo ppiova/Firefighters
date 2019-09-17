@@ -108,14 +108,15 @@
         </dd>
     </dl>
 </div>
+<hr />
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.ElementoID">Editar</a> |
-    <a asp-action="AddImage" asp-route-id="@Model.ElementoID">Agregar Imagen</a> |
-    <a asp-action="Index">Volver a la Lista</a>
+    <a class="col-md-4" asp-action="Edit" asp-route-id="@Model.ElementoID">Editar</a>| 
+    <a class="col-md-8" asp-action="AddImage" asp-route-id="@Model.ElementoID">Agregar Imagen</a>|
+    <a class="col-md-12" asp-action="Index">Volver a la Lista</a>
 </div>
-
+<hr />
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-6">
         <div>
             <h4>Imagenes</h4>
             @if (Model.ElementoImages.Count == 0)
@@ -126,23 +127,24 @@
             {
                 <table class="table">
                     <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ElementoImages.FirstOrDefault().ImageUrl)
-                            </th>
-                            <th></th>
-                        </tr>
+                      
                     </thead>
                     <tbody>
                         @foreach (var item in Model.ElementoImages)
                         {
-                            <tr>
-                                <td>
-                                    @if (!string.IsNullOrEmpty(item.ImageUrl))
-                                    {
-                                        <img src="@Url.Content(item.ImageUrl)" alt="Image" style="width:200px;height:200px;max-width: 100%; height: auto;" />
-                                    }
-                                </td>
+                        <tr>
+                            <td>
+                                @if (!string.IsNullOrEmpty(item.ImageUrl))
+                                {
+                                    <img src="@Url.Content(item.ImageUrl)" alt="@item.ElementoImageId" style="width:200px;height:200px;max-width: 100%; height: auto;" />
+                                }
+                            </td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(item.ImageFullPath))
+                                {
+                                <td>@Html.ActionLink("Descargar", "Download", new { ImagePath = @item.ImageUrl, ImageID = item.ElementoImageId}) </td>
+                                }
+                                
                                 <td>
                                     <button data-id="@item.ElementoImageId" class="btn btn-danger deleteImage" data-toggle="modal" data-target="#deleteDialog">Eliminar</button>
                                 </td>
@@ -152,6 +154,9 @@
                 </table>
             }
         </div>
+    </div>
+    <div class="col-md-6">
+        <h4>Comprobantes</h4>
     </div>
 
 </div>

@@ -4,6 +4,7 @@ using Firefighters.Web.Helpers;
 using Firefighters.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -251,6 +252,17 @@ namespace Firefighters.Web.Controllers
 
             //return RedirectToAction($"{nameof(Details)}/{elementoImage.Elemento.ElementoID}");
             return RedirectToAction("Details", "Elementos", new { @id = elementoImage.Elemento.ElementoID });
+        }
+
+        public ActionResult Download(string ImagePath, string ImageID)
+        {
+            string filePath = ImagePath;
+            string fileName = ImageID;
+
+            byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
+
+            return File(fileBytes, "application/force-download", fileName);
+
         }
 
     }
