@@ -2,6 +2,7 @@
 using Firefighters.Web.Data.Entities;
 using Firefighters.Web.Helpers;
 using Firefighters.Web.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
@@ -16,16 +17,23 @@ namespace Firefighters.Web.Controllers
         private readonly ICombosHelper _combosHelper;
         private readonly IConverterHelper _converterHelper;
         private readonly IImageHelper _imageHelper;
+        private readonly IComprobanteHelper _comprobanteHelper;
+
+        private IHostingEnvironment _env { get; }
 
         public ElementosController(DataContext context,
                                    ICombosHelper combosHelper,
                                    IConverterHelper converterHelper,
-                                   IImageHelper imageHelper)
+                                   IImageHelper imageHelper, 
+                                   IComprobanteHelper comprobanteHelper,
+                                   IHostingEnvironment env)
         {
             _dataContext = context;
             _combosHelper = combosHelper;
             _converterHelper = converterHelper;
             _imageHelper = imageHelper;
+            _comprobanteHelper = comprobanteHelper;
+            _env = env;
         }
 
         // GET: Elementos
@@ -50,6 +58,8 @@ namespace Firefighters.Web.Controllers
                 .Include(u => u.Ubicacion)
                 .Include(a => a.Area)
                 .Include(i => i.ElementoImages)
+                .Include(c => c.ElementoComprobantes)
+
                 .FirstOrDefaultAsync(m => m.ElementoID == id);
             if (elemento == null)
             {
@@ -254,16 +264,101 @@ namespace Firefighters.Web.Controllers
             return RedirectToAction("Details", "Elementos", new { @id = elementoImage.Elemento.ElementoID });
         }
 
-        public ActionResult Download(string ImagePath, string ImageID)
+        public ActionResult DownloadImage(string ImagePath)
         {
             string filePath = ImagePath;
-            string fileName = ImageID;
-
-            byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
-
-            return File(fileBytes, "application/force-download", fileName);
+          
+            string file = _env.WebRootPath + filePath;
+            
+            return File(new FileStream(file, FileMode.Open), "image/jpeg");
 
         }
 
+
+
+
+        public async Task<IActionResult> AddComprobante(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var elemento = await _dataContext.Elementos.FindAsync(id.Value);
+            if (elemento == null)
+            {
+                return NotFound();
+            }
+
+            var model = new ElementoComprobanteViewModel
+            {
+                ElementoComprobanteId = elemento.ElementoID
+
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddComprobante(ElementoComprobanteViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var path = string.Empty;
+
+                if (model.ComprobanteFile != null)
+                {
+                    path = await _comprobanteHelper.UploadComprobanteAsync(model.ComprobanteFile);
+
+                }
+
+                var elementoComprobante = new ElementoComprobante
+                {
+                    ComprobanteUrl = path,
+                    Elemento = await _dataContext.Elementos.FindAsync(model.ElementoComprobanteId),
+                    ComprobanteNombre = model.ComprobanteFile.FileName
+                };
+
+                _dataContext.ElementoComprobantes.Add(elementoComprobante);
+                await _dataContext.SaveChangesAsync();
+                //return RedirectToAction($"{nameof(Details)}/{model.ElementoImageId}");
+                return RedirectToAction("Details", "Elementos", new { @id = elementoComprobante.Elemento.ElementoID });
+
+            }
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> DeleteComprobante(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var elementoComprobante = await _dataContext.ElementoComprobantes
+                .Include(e => e.Elemento)
+                .FirstOrDefaultAsync(e => e.ElementoComprobanteId == id.Value);
+            if (elementoComprobante == null)
+            {
+                return NotFound();
+            }
+
+            _dataContext.ElementoComprobantes.Remove(elementoComprobante);
+            await _dataContext.SaveChangesAsync();
+
+            //return RedirectToAction($"{nameof(Details)}/{elementoImage.Elemento.ElementoID}");
+            return RedirectToAction("Details", "Elementos", new { @id = elementoComprobante.Elemento.ElementoID });
+        }
+
+        public ActionResult DownloadComprobante(string ComprobantePath)
+        {
+            string filePath = ComprobantePath;
+
+            string file = _env.WebRootPath + filePath;
+
+            return File(new FileStream(file, FileMode.Open, FileAccess.Read), "application/pdf");
+
+        }
     }
 }

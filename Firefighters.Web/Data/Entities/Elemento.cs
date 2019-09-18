@@ -68,6 +68,7 @@ namespace Firefighters.Web.Data.Entities
         public Titular? Titular { get; set; }
 
         public ICollection<ElementoImage> ElementoImages { get; set; }
+        public ICollection<ElementoComprobante> ElementoComprobantes { get; set; }
 
     }
   

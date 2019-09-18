@@ -15,6 +15,7 @@ namespace Firefighters.Web.Data
       
         public DbSet<Area> Areas { get; set; }
         public DbSet<Elemento> Elementos { get; set; }
+        public DbSet<ElementoComprobante> ElementoComprobantes { get; set; }
         public DbSet<ElementoImage>  ElementoImages { get; set; }
         public DbSet<Ubicacion> Ubicaciones { get; set; }
 

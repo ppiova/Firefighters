@@ -8,6 +8,8 @@
   <ItemGroup>
     <Compile Remove="Migrations\20190820043744_Users.cs" />
     <Compile Remove="Migrations\20190820043744_Users.Designer.cs" />
+    <Compile Remove="Migrations\20190918142253_comprobanteName.cs" />
+    <Compile Remove="Migrations\20190918142253_comprobanteName.Designer.cs" />
   </ItemGroup>
 
 
@@ -25,7 +27,7 @@
 
 
   <ItemGroup>
-    <Folder Include="wwwroot\ArchivosPDF\Comprobantes\" />
+    <Folder Include="wwwroot\files\Comprobantes\" />
     <Folder Include="wwwroot\images\Elementos\" />
     <Folder Include="wwwroot\images\Personas\" />
   </ItemGroup>

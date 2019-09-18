@@ -21,7 +21,7 @@ namespace Firefighters.Web.Helpers
                 await imageFile.CopyToAsync(stream);
             }
 
-            return $"~/images/Elementos/{file}";
+            return $"/images/Elementos/{file}";
         }
     }
 }

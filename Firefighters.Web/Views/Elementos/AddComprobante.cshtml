@@ -1,7 +1,29 @@
-﻿
+﻿@model Firefighters.Web.Models.ElementoComprobanteViewModel
+
 @{
-    ViewData["Title"] = "AddComprobante";
+    ViewData["Title"] = "Agregar Comprobante";
 }
 
-<h1>AddComprobante</h1>
+<h3>Agregar Comprobante</h3>
 
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddComprobante" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ElementoComprobanteId" />
+
+            <div class="form-group">
+                <label asp-for="ComprobanteFile" class="control-label"></label>
+                <input asp-for="ComprobanteFile" class="form-control" type="file" />
+                <span asp-validation-for="ComprobanteFile" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Details" asp-route-id="@Model.ElementoComprobanteId">Volver al Elemento</a>
+            </div>
+        </form>
+    </div>
+</div>

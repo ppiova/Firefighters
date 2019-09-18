@@ -110,15 +110,17 @@
 </div>
 <hr />
 <div>
-    <a class="col-md-4" asp-action="Edit" asp-route-id="@Model.ElementoID">Editar</a>| 
+    <a class="col-md-4" asp-action="Edit" asp-route-id="@Model.ElementoID">Editar</a>|
     <a class="col-md-8" asp-action="AddImage" asp-route-id="@Model.ElementoID">Agregar Imagen</a>|
+    <a class="col-md-8" asp-action="AddComprobante" asp-route-id="@Model.ElementoID">Agregar Comprobante</a>|
     <a class="col-md-12" asp-action="Index">Volver a la Lista</a>
 </div>
 <hr />
+<br />
 <div class="row">
     <div class="col-md-6">
         <div>
-            <h4>Imagenes</h4>
+
             @if (Model.ElementoImages.Count == 0)
             {
                 <h5>No Tiene Fotos Cargadas</h5>
@@ -127,26 +129,30 @@
             {
                 <table class="table">
                     <thead>
-                      
+                        <tr>
+                            <th>Imagenes</th>
+                            <th> </th>
+                            <th> </th>
+                        </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model.ElementoImages)
                         {
-                        <tr>
-                            <td>
-                                @if (!string.IsNullOrEmpty(item.ImageUrl))
-                                {
-                                    <img src="@Url.Content(item.ImageUrl)" alt="@item.ElementoImageId" style="width:200px;height:200px;max-width: 100%; height: auto;" />
-                                }
-                            </td>
-                            <td>
+                            <tr>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(item.ImageUrl))
+                                    {
+                                        <img src="@Url.Content(item.ImageUrl)" alt="@item.ElementoImageId" style="width:100px;height:100px;max-width: 100%; height: auto;" />
+                                    }
+                                </td>
+
                                 @if (!string.IsNullOrEmpty(item.ImageFullPath))
                                 {
-                                <td>@Html.ActionLink("Descargar", "Download", new { ImagePath = @item.ImageUrl, ImageID = item.ElementoImageId}) </td>
+                                    <td>@Html.ActionLink("Abrir", "DownloadImage", new { ImagePath = @item.ImageUrl }, new { target = "_blank" })</td>
                                 }
-                                
+
                                 <td>
-                                    <button data-id="@item.ElementoImageId" class="btn btn-danger deleteImage" data-toggle="modal" data-target="#deleteDialog">Eliminar</button>
+                                    <button data-id="@item.ElementoImageId" class="btn-sm btn-danger deleteImage" data-toggle="modal" data-target="#deleteDialog">Eliminar</button>
                                 </td>
                             </tr>
                         }
@@ -156,10 +162,49 @@
         </div>
     </div>
     <div class="col-md-6">
-        <h4>Comprobantes</h4>
+        @if (Model.ElementoComprobantes.Count == 0)
+        {
+            <h5>No Tiene Comprobantes Cargados</h5>
+        }
+        else
+        {
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Comprobantes</th>
+                <th> </th>
+                <th> </th>
+
+            </tr>
+        <tbody>
+            @foreach (var item in Model.ElementoComprobantes)
+            {
+                <tr>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.ComprobanteUrl))
+                        {
+                            <text> @item.ComprobanteNombre.ToString() </text>
+                        }
+                    </td>
+
+                    @if (!string.IsNullOrEmpty(item.ComprobanteFullPath))
+                    {
+                        <td>@Html.ActionLink("Abrir", "DownloadComprobante", new { ComprobantePath = @item.ComprobanteUrl }, new { target = "_blank" })</td>
+                    }
+
+
+                    <td>
+                        <button data-id="@item.ElementoComprobanteId" class="btn-sm btn-danger deleteImage" data-toggle="modal" data-target="#deleteDialog">Eliminar</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+        }
     </div>
 
 </div>
+
 
 <partial name="_DeleteDialog" />
 

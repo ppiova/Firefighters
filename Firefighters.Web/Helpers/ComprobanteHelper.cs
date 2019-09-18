@@ -13,10 +13,11 @@ namespace Firefighters.Web.Helpers
         {
             var nombre = comprobanteFile.FileName.ToString();
             //var guid = Guid.NewGuid().ToString();
-            var file = $"{nombre}.pdf";
+            var file = nombre;
+            //var file = $"{nombre}.pdf";
             var path = Path.Combine(
                 Directory.GetCurrentDirectory(),
-                "wwwroot\\ArchivosPDF\\Comprobantes",
+                "wwwroot\\files\\Comprobantes",
                 file);
 
             using (var stream = new FileStream(path, FileMode.Create))
@@ -24,7 +25,7 @@ namespace Firefighters.Web.Helpers
                 await comprobanteFile.CopyToAsync(stream);
             }
 
-            return $"~/ArchivosPDF/Comprobantes/{file}";
+            return $"/files/Comprobantes/{file}";
         }
     }
 }

@@ -88,6 +88,23 @@ namespace Firefighters.Web.Migrations
                     b.ToTable("Elementos");
                 });
 
+            modelBuilder.Entity("Firefighters.Web.Data.Entities.ElementoComprobante", b =>
+                {
+                    b.Property<int>("ElementoComprobanteId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ComprobanteUrl");
+
+                    b.Property<int?>("ElementoID");
+
+                    b.HasKey("ElementoComprobanteId");
+
+                    b.HasIndex("ElementoID");
+
+                    b.ToTable("ElementoComprobantes");
+                });
+
             modelBuilder.Entity("Firefighters.Web.Data.Entities.ElementoImage", b =>
                 {
                     b.Property<int>("ElementoImageId")
@@ -305,6 +322,13 @@ namespace Firefighters.Web.Migrations
                     b.HasOne("Firefighters.Web.Data.Entities.Ubicacion", "Ubicacion")
                         .WithMany("Elementos")
                         .HasForeignKey("UbicacionID");
+                });
+
+            modelBuilder.Entity("Firefighters.Web.Data.Entities.ElementoComprobante", b =>
+                {
+                    b.HasOne("Firefighters.Web.Data.Entities.Elemento", "Elemento")
+                        .WithMany()
+                        .HasForeignKey("ElementoID");
                 });
 
             modelBuilder.Entity("Firefighters.Web.Data.Entities.ElementoImage", b =>
