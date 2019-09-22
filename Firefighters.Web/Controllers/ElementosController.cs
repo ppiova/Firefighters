@@ -40,12 +40,23 @@ namespace Firefighters.Web.Controllers
         public IActionResult Index()
         {
             return View(_dataContext.Elementos
+                .Where(e => e.Activo == true && e.BajaFecha == null)
                 .Include(u => u.Ubicacion)
                 .Include(a => a.Area)
                 .Include(i => i.ElementoImages)
+                
              );
         }
 
+        public IActionResult NoActivos()
+        {
+            return View(_dataContext.Elementos
+                .Where(e => e.Activo == false && e.BajaFecha != null)
+                .Include(u => u.Ubicacion)
+                .Include(a => a.Area)
+                .Include(i => i.ElementoImages)
+                );
+        }
         // GET: Elementos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
