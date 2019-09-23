@@ -5,6 +5,7 @@ using Firefighters.Web.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,7 +37,7 @@ namespace Firefighters.Web.Controllers
             _env = env;
         }
 
-        // GET: Elementos
+
         public IActionResult Index()
         {
             return View(_dataContext.Elementos
@@ -51,13 +52,13 @@ namespace Firefighters.Web.Controllers
         public IActionResult NoActivos()
         {
             return View(_dataContext.Elementos
-                .Where(e => e.Activo == false && e.BajaFecha != null)
+                .Where(e => e.Activo == false || e.BajaFecha != null)
                 .Include(u => u.Ubicacion)
                 .Include(a => a.Area)
                 .Include(i => i.ElementoImages)
                 );
         }
-        // GET: Elementos/Details/5
+     
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -80,7 +81,6 @@ namespace Firefighters.Web.Controllers
             return View(elemento);
         }
 
-        // GET: Elementos/Create
         public IActionResult Create(int? id)
         {
 
@@ -114,7 +114,6 @@ namespace Firefighters.Web.Controllers
             return View(model);
         }
 
-        // GET: Elementos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -168,6 +167,30 @@ namespace Firefighters.Web.Controllers
 
             return View(model);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> BajaLogica(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var elemento = await _dataContext.Elementos
+                .FirstOrDefaultAsync(m => m.ElementoID == id);
+            if (elemento == null)
+            {
+                return NotFound();
+            }
+
+            elemento.Activo = false;
+            elemento.BajaFecha = DateTime.Now;
+            _dataContext.Elementos.Update(elemento);
+            await _dataContext.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+              
 
         // GET: Elementos/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -285,9 +308,6 @@ namespace Firefighters.Web.Controllers
 
         }
 
-
-
-
         public async Task<IActionResult> AddComprobante(int? id)
         {
             if (id == null)
@@ -358,7 +378,6 @@ namespace Firefighters.Web.Controllers
             _dataContext.ElementoComprobantes.Remove(elementoComprobante);
             await _dataContext.SaveChangesAsync();
 
-            //return RedirectToAction($"{nameof(Details)}/{elementoImage.Elemento.ElementoID}");
             return RedirectToAction("Details", "Elementos", new { @id = elementoComprobante.Elemento.ElementoID });
         }
 

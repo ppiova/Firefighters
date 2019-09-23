@@ -33,7 +33,7 @@ namespace Firefighters.Web.Helpers
                 CompraFecha = view.CompraFecha,
                 VencimientoFecha = view.VencimientoFecha,
                 Observaciones = view.Observaciones,
-                Activo = view.Activo,
+                Activo = true,
                 BajaFecha = view.BajaFecha,
                 Estado = view.Estado,
                 Titular = view.Titular,
