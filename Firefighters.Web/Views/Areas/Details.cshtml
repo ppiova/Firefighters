@@ -16,8 +16,14 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.AreaName)
         </dd>
+        <dt class="col-sm-2">
+            <a>LLEVA INVENTARIO</a>
+        </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LlevaInventario)
+            @if (Model.LlevaInventario == true)
+            {<a>SI</a>}
+            @if (Model.LlevaInventario == false)
+            {<a>NO</a>}
         </dd>
     </dl>
 </div>

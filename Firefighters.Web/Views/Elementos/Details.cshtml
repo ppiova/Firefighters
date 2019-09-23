@@ -137,23 +137,24 @@
                     <tbody>
                         @foreach (var item in Model.ElementoImages)
                         {
-                            <tr>
-                                <td>
-                                    @if (!string.IsNullOrEmpty(item.ImageUrl))
-                                    {
-                                        <img src="@Url.Content(item.ImageUrl)" alt="@item.ElementoImageId" style="width:100px;height:100px;max-width: 100%; height: auto;" />
-                                    }
-                                </td>
-
-                                @if (!string.IsNullOrEmpty(item.ImageFullPath))
+                        <tr>
+                            <td>
+                                @if (!string.IsNullOrEmpty(item.ImageUrl))
                                 {
-                                    <td>@Html.ActionLink("Abrir", "DownloadImage", new { ImagePath = @item.ImageUrl }, new { target = "_blank" })</td>
+                                    <img src="@Url.Content(item.ImageUrl)" alt="@item.ElementoImageId" style="width:100px;height:100px;max-width: 100%; height: auto;" />
                                 }
+                            </td>
 
-                                <td>
-                                    <button data-id="@item.ElementoImageId" class="btn-sm btn-danger deleteImage" data-toggle="modal" data-target="#deleteDialog">Eliminar</button>
-                                </td>
-                            </tr>
+                            @if (!string.IsNullOrEmpty(item.ImageFullPath))
+                            {
+                                <td>@Html.ActionLink("Abrir", "DownloadImage", new { ImagePath = @item.ImageUrl }, new { @class = "btn btn-primary", target = "_blank" })</td>
+                               
+                            }
+
+                            <td>
+                                <button data-id="@item.ElementoImageId" class="btn btn-danger deleteImage" data-toggle="modal" data-target="#deleteDialog">Eliminar</button>
+                            </td>
+                        </tr>
                         }
                     </tbody>
                 </table>
@@ -173,12 +174,11 @@
                 <th>Comprobantes</th>
                 <th> </th>
                 <th> </th>
-
             </tr>
         <tbody>
             @foreach (var item in Model.ElementoComprobantes)
             {
-                <tr>
+                <   tr>
                     <td>
                         @if (!string.IsNullOrEmpty(item.ComprobanteUrl))
                         {
@@ -188,12 +188,10 @@
 
                     @if (!string.IsNullOrEmpty(item.ComprobanteFullPath))
                     {
-                        <td>@Html.ActionLink("Abrir", "DownloadComprobante", new { ComprobantePath = @item.ComprobanteUrl }, new { target = "_blank" })</td>
+                        <td>@Html.ActionLink("Abrir", "DownloadComprobante", new { ComprobantePath = @item.ComprobanteUrl }, new { @class = "btn btn-primary", target = "_blank" })</td>
                     }
-
-
                     <td>
-                        <button data-id="@item.ElementoComprobanteId" class="btn-sm btn-danger deleteImage" data-toggle="modal" data-target="#deleteDialog">Eliminar</button>
+                        <button data-id="@item.ElementoComprobanteId" class="btn btn-danger deleteImage" data-toggle="modal" data-target="#deleteDialog">Eliminar</button>
                     </td>
                 </tr>
             }

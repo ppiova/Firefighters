@@ -52,7 +52,9 @@ namespace Firefighters.Web.Helpers
 
         public IEnumerable<SelectListItem> GetComboAreas()
         {
-            var list = _dataContext.Areas.Select(p => new SelectListItem
+            var list = _dataContext.Areas
+                .Where (a => a.LlevaInventario == true)
+                .Select(p => new SelectListItem
             {
                 Text = p.AreaName,
                 Value = p.AreaID.ToString()

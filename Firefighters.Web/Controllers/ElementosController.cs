@@ -254,7 +254,7 @@ namespace Firefighters.Web.Controllers
             if (ModelState.IsValid)
             {
                 var path = string.Empty;
-
+                //TODO: Validar que sea png o jpg
                 if (model.ImageFile != null)
                 {
                     path = await _imageHelper.UploadImageAsync(model.ImageFile);

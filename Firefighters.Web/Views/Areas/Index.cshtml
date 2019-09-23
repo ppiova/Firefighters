@@ -12,8 +12,11 @@
 <table class="table">
     <thead>
         <tr>
-           <th>
+            <th>
                 @Html.DisplayNameFor(model => model.AreaName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LlevaInventario)
             </th>
             <th class="text-center">OPCIONES</th>
         </tr>
@@ -21,9 +24,17 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-           
+
             <td>
                 @Html.DisplayFor(modelItem => item.AreaName)
+            </td>
+            <td>
+                @if (item.LlevaInventario == true)
+                { <a>SI</a>}
+                @if (item.LlevaInventario == false)
+                {<a>NO</a> }
+
+                @*@Html.DisplayFor(modelItem => item.LlevaInventario)*@
             </td>
             <td class="text-center">
                 <a asp-action="Edit" asp-route-id="@item.AreaID">Editar</a> |
