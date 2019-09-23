@@ -56,6 +56,7 @@ namespace Firefighters.Web.Data.Entities
         [Display(Name = "ACTIVO")]
         public bool Activo { get; set; }
 
+        [DataType(DataType.Date)]
         [Display(Name = "Fecha Baja")]
         //[DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime? BajaFecha { get; set; }

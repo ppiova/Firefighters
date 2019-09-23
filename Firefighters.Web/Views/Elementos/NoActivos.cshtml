@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<Firefighters.Web.Data.Entities.Elemento>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Elementos No Activos";
 }
 
-<h2 class="text-center">ELEMENTOS</h2>
+<h2 class="text-center">ELEMENTOS NO ACTIVOS</h2>
 @*TODO: ACOMODAR TABLA*@
 <p>
-    <a asp-action="Create">Crear Elemento</a> |
-    <a asp-action="NoActivos">Ver Elementos no Activos</a>
+    <a asp-action="Index">Volver a la Lista</a> 
+    
 </p>
 <table id="myTableElementos" class="table table-striped table-bordered" style="width:100%">
     <thead>
@@ -34,18 +34,18 @@
                 <th>
                     @Html.DisplayNameFor(model => model.CompraFecha)
                 </th>*@
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.VencimientoFecha)
-            </th>
-            @*<th>
+            </th>*@
+                 <th>
                     @Html.DisplayNameFor(model => model.Observaciones)
-                </th>*@
-            @*<th>
-                    @Html.DisplayNameFor(model => model.Activo)
                 </th>
+                @*<th>
+                    @Html.DisplayNameFor(model => model.Activo)
+                </th>*@
                 <th>
                     @Html.DisplayNameFor(model => model.BajaFecha)
-                </th>*@
+                </th>
             <th>
                 @Html.DisplayNameFor(model => model.Area.AreaName)
             </th>
@@ -85,18 +85,18 @@
 
                         @item.CompraFecha?.ToString("dd/MM/yyyy")
                     </td>*@
-                <td>
+                @*<td>
                     @item.VencimientoFecha?.ToString("dd/MM/yyyy")
+                </td>*@
+                <td>
+                        @Html.DisplayFor(modelItem => item.Observaciones)
                 </td>
                 @*<td>
-                        @Html.DisplayFor(modelItem => item.Observaciones)
-                    </td>*@
-                @*<td>
                         @Html.DisplayFor(modelItem => item.Activo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BajaFecha)
-                    </td>*@
+                 </td>*@
+                <td>
+                    @item.BajaFecha?.ToString("dd/MM/yyyy")
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Area.AreaName)
                 </td>
@@ -108,7 +108,7 @@
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.ElementoID">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.ElementoID">Detalle</a> |
+                    @*<a asp-action="Details" asp-route-id="@item.ElementoID">Detalle</a> |*@
                     <a asp-action="Delete" asp-route-id="@item.ElementoID">Eliminar</a>
                 </td>
             </tr>
@@ -120,4 +120,5 @@
 			$(document).ready(function () {
 				$('#myTableElementos').DataTable();//myTable is the id of the table to be displayed as dataTable
 			});
-    </script>}
+    </script>
+}
