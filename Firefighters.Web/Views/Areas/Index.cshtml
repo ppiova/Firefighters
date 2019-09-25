@@ -4,10 +4,10 @@
     ViewData["Title"] = "AREAS";
 }
 
-<h2 class="text-center">AREAS</h2>
+<h2 class="text-center"> AREAS</h2>
 
 <p>
-    <a asp-action="Create">Crear Area</a>
+    <a asp-action="Create" class="btn btn-success"><i class="fas fa-plus-square"></i>&nbsp;Area</a>
 </p>
 <table class="table">
     <thead>
@@ -17,31 +17,56 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.LlevaInventario)
-            </th>
-            <th class="text-center">OPCIONES</th>
+            </th >
+            <th colspan="2" class="text-center">OPCIONES</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
+        @foreach (var item in Model)
+        {
+            <tr>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.AreaName)
-            </td>
-            <td>
-                @if (item.LlevaInventario == true)
-                { <a>SI</a>}
-                @if (item.LlevaInventario == false)
-                {<a>NO</a> }
+                <td>
+                    @Html.DisplayFor(modelItem => item.AreaName)
+                </td>
+                <td>
+                    @if (item.LlevaInventario == true)
+                    {<a>SI</a>}
+                    @if (item.LlevaInventario == false)
+                    {<a>NO</a> }
 
-                @*@Html.DisplayFor(modelItem => item.LlevaInventario)*@
-            </td>
-            <td class="text-center">
-                <a asp-action="Edit" asp-route-id="@item.AreaID">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.AreaID">Detalles</a> |
-                <a asp-action="Delete" asp-route-id="@item.AreaID">Eliminar</a>
-            </td>
-        </tr>
-}
+                    @*@Html.DisplayFor(modelItem => item.LlevaInventario)*@
+                </td>
+                <td style="text-align:center">
+                    <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.AreaID"><i class="fas fa-edit"></i> </a>
+                    <a asp-action="Details" class="btn btn-info" asp-route-id="@item.AreaID"><i class="fas fa-receipt"></i> </a>
+                     <button data-id="@item.AreaID" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog"><i class="fas fa-trash-alt"></i></button>
+                </td>
+           
+            </tr>
+        }
     </tbody>
 </table>
+
+<partial name="_DeleteDialog" />
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Delete item
+            var item_to_delete;
+
+            $('.deleteItem').click((e) => {
+                item_to_delete = e.currentTarget.dataset.id;
+
+            });
+
+            $("#btnYesDelete").click(function () {
+                window.location.href = '/Areas/Delete/' + item_to_delete;
+
+            });
+        });
+    </script>
+}

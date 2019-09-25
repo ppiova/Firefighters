@@ -6,5 +6,7 @@
       "library": "datatables@1.10.19",
       "destination": "wwwroot/lib/datatables/"
     }
+
+   
   ]
 }

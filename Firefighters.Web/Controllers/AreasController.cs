@@ -126,28 +126,8 @@ namespace Firefighters.Web.Controllers
             }
 
             var area = await _context.Areas
+                .Include(a=> a.Elementos)
                 .FirstOrDefaultAsync(m => m.AreaID == id);
-            if (area == null)
-            {
-                return NotFound();
-            }
-
-            return View(area);
-        }
-
-        // POST: Areas/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(short ?id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            var area = await _context.Areas
-               .Include(e => e.Elementos)
-               .FirstOrDefaultAsync(a => a.AreaID == id);
-
             if (area == null)
             {
                 return NotFound();
@@ -155,7 +135,7 @@ namespace Firefighters.Web.Controllers
             if (area.Elementos.Count > 0)
             {
                 ModelState.AddModelError(string.Empty, "LA AREA NO SE PUEDE ELIMINAR. SE ENCUENTRA ASIGANADA A ELEMENTOS.");
-                return View(area);
+                return RedirectToAction(nameof(Index));
             }
 
             _context.Areas.Remove(area);
@@ -163,6 +143,7 @@ namespace Firefighters.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+      
         private bool AreaExists(short id)
         {
             return _context.Areas.Any(e => e.AreaID == id);
