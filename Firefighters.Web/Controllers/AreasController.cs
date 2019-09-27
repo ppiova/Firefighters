@@ -22,6 +22,12 @@ namespace Firefighters.Web.Controllers
         // GET: Areas
         public async Task<IActionResult> Index()
         {
+            // check if TempData contains some error message and if yes add to the model state.
+            //if (TempData["CustomError"] != null)
+            //{
+            //    ModelState.AddModelError(string.Empty, TempData["CustomError"].ToString());
+            //}
+
             return View(await _context.Areas.OrderBy(a => a.AreaName).ToListAsync());
            
         }
@@ -63,6 +69,7 @@ namespace Firefighters.Web.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+         
             return View(area);
         }
 
@@ -134,12 +141,14 @@ namespace Firefighters.Web.Controllers
             }
             if (area.Elementos.Count > 0)
             {
-                ModelState.AddModelError(string.Empty, "LA AREA NO SE PUEDE ELIMINAR. SE ENCUENTRA ASIGANADA A ELEMENTOS.");
+                ModelState.AddModelError(string.Empty, "Este ITEM no se puede ELIMINAR");
                 return RedirectToAction(nameof(Index));
             }
 
             _context.Areas.Remove(area);
             await _context.SaveChangesAsync();
+
+            TempData["CustomError"] = "Eliminación Exitosa";
             return RedirectToAction(nameof(Index));
         }
 

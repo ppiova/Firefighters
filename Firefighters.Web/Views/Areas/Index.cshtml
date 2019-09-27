@@ -5,7 +5,7 @@
 }
 
 <h2 class="text-center"> AREAS</h2>
-
+@*@Html.ValidationMessage("CustomError")*@
 <p>
     <a asp-action="Create" class="btn btn-success"><i class="fas fa-plus-square"></i>&nbsp;Area</a>
 </p>
@@ -17,7 +17,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.LlevaInventario)
-            </th >
+            </th>
             <th colspan="2" class="text-center">OPCIONES</th>
         </tr>
     </thead>
@@ -40,9 +40,9 @@
                 <td style="text-align:center">
                     <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.AreaID"><i class="fas fa-edit"></i> </a>
                     <a asp-action="Details" class="btn btn-info" asp-route-id="@item.AreaID"><i class="fas fa-receipt"></i> </a>
-                     <button data-id="@item.AreaID" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog"><i class="fas fa-trash-alt"></i></button>
+                    <button data-id="@item.AreaID" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog"><i class="fas fa-trash-alt"></i></button>
                 </td>
-           
+
             </tr>
         }
     </tbody>
