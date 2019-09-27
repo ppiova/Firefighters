@@ -22,11 +22,8 @@ namespace Firefighters.Web.Controllers
         // GET: Areas
         public async Task<IActionResult> Index()
         {
-            // check if TempData contains some error message and if yes add to the model state.
-            //if (TempData["CustomError"] != null)
-            //{
-            //    ModelState.AddModelError(string.Empty, TempData["CustomError"].ToString());
-            //}
+           
+           
 
             return View(await _context.Areas.OrderBy(a => a.AreaName).ToListAsync());
            
@@ -69,6 +66,7 @@ namespace Firefighters.Web.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
          
             return View(area);
         }
@@ -119,6 +117,7 @@ namespace Firefighters.Web.Controllers
                         throw;
                     }
                 }
+         
                 return RedirectToAction(nameof(Index));
             }
             return View(area);
