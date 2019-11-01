@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-﻿@model IEnumerable<Firefighters.Web.Data.Entities.Area>
+@model IEnumerable<Firefighters.Web.Data.Entities.Area>
 
 @{
     ViewData["Title"] = "AREAS";
@@ -70,78 +69,4 @@
             });
         });
     </script>
-=======
-﻿@model IEnumerable<Firefighters.Web.Data.Entities.Area>
-
-@{
-    ViewData["Title"] = "AREAS";
-}
-
-<h2 class="text-center"> AREAS</h2>
-@*@Html.ValidationMessage("CustomError")*@
-<p>
-    <a asp-action="Create" class="btn btn-success"><i class="fas fa-plus-square"></i>&nbsp;Area</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.AreaName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LlevaInventario)
-            </th>
-            <th colspan="2" class="text-center">OPCIONES</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.AreaName)
-                </td>
-                <td>
-                    @if (item.LlevaInventario == true)
-                    {<a>SI</a>}
-                    @if (item.LlevaInventario == false)
-                    {<a>NO</a> }
-
-                    @*@Html.DisplayFor(modelItem => item.LlevaInventario)*@
-                </td>
-                <td style="text-align:center">
-                    <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.AreaID"><i class="fas fa-edit"></i> </a>
-                    <a asp-action="Details" class="btn btn-info" asp-route-id="@item.AreaID"><i class="fas fa-receipt"></i> </a>
-                    <button data-id="@item.AreaID" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog"><i class="fas fa-trash-alt"></i></button>
-                </td>
-
-            </tr>
-        }
-    </tbody>
-</table>
-<br />
-
-<partial name="_DeleteDialog" />
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            // Delete item
-            var item_to_delete;
-
-            $('.deleteItem').click((e) => {
-                item_to_delete = e.currentTarget.dataset.id;
-
-            });
-
-            $("#btnYesDelete").click(function () {
-                window.location.href = '/Areas/Delete/' + item_to_delete;
-
-            });
-        });
-    </script>
->>>>>>> c42cd6f907adb9d1b8dd000d90985420512be84f
 }
