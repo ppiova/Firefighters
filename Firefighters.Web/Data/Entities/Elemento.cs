@@ -8,7 +8,7 @@ namespace Firefighters.Web.Data.Entities
 {
     public class Elemento
     {
-        [Display(Name = "Nro. Elemento")]
+        [Display(Name = "Código Elemento")]
         //[Required(ErrorMessage = "El campo {0} es Obligatorio.")]
         public int ElementoID { get; set; }
 
@@ -17,22 +17,11 @@ namespace Firefighters.Web.Data.Entities
         [Required(ErrorMessage = "La {0} es obligatorio.")]
         public string Descripcion { get; set; }
 
-        [Display(Name = "Modelo")]
-        [MaxLength(50, ErrorMessage = "El {0} no debe tener mas de {1} caracteres.")]
-        public string Modelo { get; set; }
-
-        [Display(Name = "Marca")]
-        [MaxLength(50, ErrorMessage = "La {0} no debe tener mas de {1} caracteres.")]
-        public string Marca { get; set; }
-
         [Display(Name = "Nro. Serie")]
         [MaxLength(50, ErrorMessage = "El {0} no debe tener mas de {1} caracteres.")]
         public string NroSerie { get; set; }
 
-        [Display(Name = "Código")]
-        [MaxLength(50, ErrorMessage = "El {0} no debe tener mas de {1} caracteres.")]
-        public string Codigo { get; set; }
-
+       
         //TODO: ver fechas formato
         [DataType(DataType.Date)]
         [Display(Name = "Fecha Fabricación")]
@@ -64,6 +53,8 @@ namespace Firefighters.Web.Data.Entities
 
         public Area Area { get; set; }
         public Ubicacion Ubicacion { get; set; }
+        public Marca Marca { get; set; }
+        public Modelo Modelo { get; set; }
 
         public Estado? Estado { get; set; }
         public Titular? Titular { get; set; }

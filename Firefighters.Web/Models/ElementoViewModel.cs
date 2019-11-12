@@ -11,6 +11,17 @@ namespace Firefighters.Web.Models
     public class ElementoViewModel : Elemento
     {
 
+        [Display(Name = "Marcas")]
+        [Range(1, Int16.MaxValue, ErrorMessage = "Debe seleccionar una Marca.")]
+        public Int16 MarcaID { get; set; }
+        public IEnumerable<SelectListItem> Marcas { get; set; }
+
+        [Display(Name = "Modelos")]
+        [Range(1, Int16.MaxValue, ErrorMessage = "Debe seleccionar un Modelo.")]
+        public Int16 ModeloID { get; set; }
+
+        public IEnumerable<SelectListItem> Modelos { get; set; }
+
         [Required(ErrorMessage = "El campo {0} es obligatorio.")]
         [Display(Name = "Areas")]
         [Range(1, Int16.MaxValue, ErrorMessage = "Debe seleccionar un Area.")]

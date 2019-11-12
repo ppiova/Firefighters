@@ -44,6 +44,8 @@ namespace Firefighters.Web.Controllers
                 .Where(e => e.Activo == true && e.BajaFecha == null)
                 .Include(u => u.Ubicacion)
                 .Include(a => a.Area)
+                .Include(mo => mo.Modelo)
+                .Include(ma => ma.Marca)
                 .Include(i => i.ElementoImages)
                 
              );
@@ -55,6 +57,8 @@ namespace Firefighters.Web.Controllers
                 .Where(e => e.Activo == false || e.BajaFecha != null)
                 .Include(u => u.Ubicacion)
                 .Include(a => a.Area)
+                .Include(mo => mo.Modelo)
+                .Include(ma => ma.Marca)
                 .Include(i => i.ElementoImages)
                 );
         }
@@ -69,6 +73,8 @@ namespace Firefighters.Web.Controllers
             var elemento = await _dataContext.Elementos
                 .Include(u => u.Ubicacion)
                 .Include(a => a.Area)
+                .Include(mo => mo.Modelo)
+                .Include(ma => ma.Marca)
                 .Include(i => i.ElementoImages)
                 .Include(c => c.ElementoComprobantes)
 
@@ -90,6 +96,8 @@ namespace Firefighters.Web.Controllers
                 Ubicaciones = _combosHelper.GetComboUbicaciones(),
                 Estados = _combosHelper.GetComboEstadosElementos(),
                 Titulares = _combosHelper.GetComboTitulares(),
+                Marcas = _combosHelper.GetComboMarcas(),
+                Modelos = _combosHelper.GetComboModelos(),
                 Activo = true
             };
 

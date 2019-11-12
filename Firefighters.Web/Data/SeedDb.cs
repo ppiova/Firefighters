@@ -1,5 +1,6 @@
 ﻿using Firefighters.Web.Data.Entities;
 using Firefighters.Web.Helpers;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,6 +24,8 @@ namespace Firefighters.Web.Data
             await _context.Database.EnsureCreatedAsync();
             await CheckAreas();
             await CheckUbicaciones();
+            await CheckMarcas();
+            await CheckModelos();
             await CheckRoles();
             //Creo un Admin y un Bombero
             await CheckUserAsync("1010", "Pablo", "Piovano", "ppiova@cablasociados.com", "3493415005", "Fader 1740", "Admin");
@@ -30,27 +33,62 @@ namespace Firefighters.Web.Data
 
         }
 
+        public async Task CheckModelos()
+        {
+            if (!_context.Modelos.Any())
+            {
+                _context.Modelos.Add(new Entities.Modelo { ModeloElemento = "Airboss Evolution" });
+                _context.Modelos.Add(new Entities.Modelo { ModeloElemento = "FPS7000" });
+                _context.Modelos.Add(new Entities.Modelo { ModeloElemento = "ASAP SORBER" });
+                _context.Modelos.Add(new Entities.Modelo { ModeloElemento = "Elios" });
+                _context.Modelos.Add(new Entities.Modelo { ModeloElemento = "Am´D" });
+                _context.Modelos.Add(new Entities.Modelo { ModeloElemento = "Oxan" });
+                _context.Modelos.Add(new Entities.Modelo { ModeloElemento = "William" });
+                _context.Modelos.Add(new Entities.Modelo { ModeloElemento = "HTN9000D" });
+
+                await _context.SaveChangesAsync();
+
+            }
+        }
+
+        private async Task CheckMarcas()
+        {
+            if (!_context.Marcas.Any())
+            {
+                _context.Marcas.Add(new Entities.Marca { MarcaElemento = "MOTOROLA" });
+                _context.Marcas.Add(new Entities.Marca { MarcaElemento = "Holmatro" });
+                _context.Marcas.Add(new Entities.Marca { MarcaElemento = "Nacional" });
+                _context.Marcas.Add(new Entities.Marca { MarcaElemento = "Genfor" });
+                _context.Marcas.Add(new Entities.Marca { MarcaElemento = "FEMA" });
+                _context.Marcas.Add(new Entities.Marca { MarcaElemento = "Gherardi" });
+                _context.Marcas.Add(new Entities.Marca { MarcaElemento = "Scepter" });
+                _context.Marcas.Add(new Entities.Marca { MarcaElemento = "EASTERN" });
+
+                await _context.SaveChangesAsync();
+
+            }
+        }
+
         private async Task CheckAreas()
         {
             if (!_context.Areas.Any())
             {
-                _context.Areas.Add(new Entities.Area { AreaName = "Acuatica" });
-                _context.Areas.Add(new Entities.Area { AreaName = "Alturas" });
-                _context.Areas.Add(new Entities.Area { AreaName = "Coc" });
-                _context.Areas.Add(new Entities.Area { AreaName = "Comunicaciones" });
-                _context.Areas.Add(new Entities.Area { AreaName = "Drone" });
-                _context.Areas.Add(new Entities.Area { AreaName = "EPP" });
-                _context.Areas.Add(new Entities.Area { AreaName = "Forestales" });
-                _context.Areas.Add(new Entities.Area { AreaName = "Herramientas" });
-                _context.Areas.Add(new Entities.Area { AreaName = "Herramientas de Zapa" });
-                _context.Areas.Add(new Entities.Area { AreaName = "Iluminación" });
-                _context.Areas.Add(new Entities.Area { AreaName = "Incendio" });
-                _context.Areas.Add(new Entities.Area { AreaName = "Indumentaria" });
-                _context.Areas.Add(new Entities.Area { AreaName = "Mat-Pel" });
-                _context.Areas.Add(new Entities.Area { AreaName = "Rescate Vehicular" });
-                _context.Areas.Add(new Entities.Area { AreaName = "Señalización" });
-                _context.Areas.Add(new Entities.Area { AreaName = "Trauma" });
-                _context.Areas.Add(new Entities.Area { AreaName = "Vehículos" });
+                _context.Areas.Add(new Entities.Area { AreaName = "Alturas", LlevaInventario = true });
+                _context.Areas.Add(new Entities.Area { AreaName = "Coc" , LlevaInventario = true });
+                _context.Areas.Add(new Entities.Area { AreaName = "Comunicaciones", LlevaInventario = true });
+                _context.Areas.Add(new Entities.Area { AreaName = "Drone", LlevaInventario = true });
+                _context.Areas.Add(new Entities.Area { AreaName = "EPP" , LlevaInventario = true });
+                _context.Areas.Add(new Entities.Area { AreaName = "Forestales" , LlevaInventario = true });
+                _context.Areas.Add(new Entities.Area { AreaName = "Herramientas", LlevaInventario = true });
+                _context.Areas.Add(new Entities.Area { AreaName = "Herramientas de Zapa" , LlevaInventario = true });
+                _context.Areas.Add(new Entities.Area { AreaName = "Iluminación" ,LlevaInventario = true });
+                _context.Areas.Add(new Entities.Area { AreaName = "Incendio", LlevaInventario = true });
+                _context.Areas.Add(new Entities.Area { AreaName = "Indumentaria" , LlevaInventario = true });
+                _context.Areas.Add(new Entities.Area { AreaName = "Mat-Pel" , LlevaInventario = true });
+                _context.Areas.Add(new Entities.Area { AreaName = "Rescate Vehicular" , LlevaInventario = true });
+                _context.Areas.Add(new Entities.Area { AreaName = "Señalización", LlevaInventario = true });
+                _context.Areas.Add(new Entities.Area { AreaName = "Trauma", LlevaInventario = true });
+                _context.Areas.Add(new Entities.Area { AreaName = "Vehículos", LlevaInventario = true });
 
                 await _context.SaveChangesAsync();
 

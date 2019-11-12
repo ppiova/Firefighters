@@ -14,38 +14,39 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.ElementoID)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Descripcion)
             </th>
             @*<th>
-                    @Html.DisplayNameFor(model => model.Modelo)
-                </th>*@
+            @Html.DisplayNameFor(model => model.Modelo)
+        </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Marca)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NroSerie)
             </th>
+
+            @*<th>
+            @Html.DisplayNameFor(model => model.FabricacionFecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompraFecha)
+        </th>*@
+            @*<th>
+            @Html.DisplayNameFor(model => model.VencimientoFecha)
+        </th>*@
             <th>
-                @Html.DisplayNameFor(model => model.Codigo)
+                @Html.DisplayNameFor(model => model.Observaciones)
             </th>
             @*<th>
-                    @Html.DisplayNameFor(model => model.FabricacionFecha)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CompraFecha)
-                </th>*@
-            @*<th>
-                @Html.DisplayNameFor(model => model.VencimientoFecha)
-            </th>*@
-                 <th>
-                    @Html.DisplayNameFor(model => model.Observaciones)
-                </th>
-                @*<th>
-                    @Html.DisplayNameFor(model => model.Activo)
-                </th>*@
-                <th>
-                    @Html.DisplayNameFor(model => model.BajaFecha)
-                </th>
+            @Html.DisplayNameFor(model => model.Activo)
+        </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.BajaFecha)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Area.AreaName)
             </th>
@@ -62,56 +63,57 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Descripcion)
-                </td>
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.Modelo)
-                    </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.Marca)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NroSerie)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Codigo)
-                </td>
-                @*<td>
-                        @item.FabricacionFecha?.ToString("dd/MM/yyyy")
-                    </td>*@
-                @*<td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ElementoID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.Modelo)
+        </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Marca)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NroSerie)
+            </td>
 
-                        @item.CompraFecha?.ToString("dd/MM/yyyy")
-                    </td>*@
-                @*<td>
-                    @item.VencimientoFecha?.ToString("dd/MM/yyyy")
-                </td>*@
-                <td>
-                        @Html.DisplayFor(modelItem => item.Observaciones)
-                </td>
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.Activo)
-                 </td>*@
-                <td>
-                    @item.BajaFecha?.ToString("dd/MM/yyyy")
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Area.AreaName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Ubicacion.UbicacionElemento)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Estado)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ElementoID">Editar</a> |
-                    @*<a asp-action="Details" asp-route-id="@item.ElementoID">Detalle</a> |*@
-                    <a asp-action="Delete" asp-route-id="@item.ElementoID">Eliminar</a>
-                </td>
-            </tr>
+            @*<td>
+            @item.FabricacionFecha?.ToString("dd/MM/yyyy")
+        </td>*@
+            @*<td>
+
+            @item.CompraFecha?.ToString("dd/MM/yyyy")
+        </td>*@
+            @*<td>
+            @item.VencimientoFecha?.ToString("dd/MM/yyyy")
+        </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Observaciones)
+            </td>
+            @*<td>
+               @Html.DisplayFor(modelItem => item.Activo)
+        </td>*@
+            <td>
+                @item.BajaFecha?.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Area.AreaName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ubicacion.UbicacionElemento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ElementoID">Editar</a> |
+                @*<a asp-action="Details" asp-route-id="@item.ElementoID">Detalle</a> |*@
+                <a asp-action="Delete" asp-route-id="@item.ElementoID">Eliminar</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
