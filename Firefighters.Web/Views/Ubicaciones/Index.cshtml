@@ -3,9 +3,9 @@
 @{
     ViewData["Title"] = "Index";
 }
-    <h2 class="text-center">UBICACIONES</h2>
+<h2 class="text-center">UBICACIONES</h2>
 <p>
-    <a asp-action="Create">Crear Ubicación</a>
+    <a asp-action="Create" class="btn btn-success"><i class="fas fa-plus-square"></i>&nbsp;Ubicación</a>
 </p>
 <table class="table">
     <thead>
@@ -13,21 +13,44 @@
             <th>
                 @Html.DisplayNameFor(model => model.UbicacionElemento)
             </th>
-            <th></th>
+            <th colspan="2" class="text-center">OPCIONES</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UbicacionElemento)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.UbicacionID">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.UbicacionID">Detalle</a> |
-                <a asp-action="Delete" asp-route-id="@item.UbicacionID">Eliminar</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UbicacionElemento)
+                </td>
+                <td class="text-center">
+                    <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.UbicacionID"><i class="fas fa-edit"></i> </a>
+                    <a asp-action="Details" class="btn btn-info" asp-route-id="@item.UbicacionID"><i class="fas fa-receipt"></i> </a>
+                    <button data-id="@item.UbicacionID" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog"><i class="fas fa-trash-alt"></i></button>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<partial name="_DeleteDialog" />
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Delete item
+            var item_to_delete;
+
+            $('.deleteItem').click((e) => {
+                item_to_delete = e.currentTarget.dataset.id;
+
+            });
+
+            $("#btnYesDelete").click(function () {
+                window.location.href = '/Ubicaciones/Delete/' + item_to_delete;
+
+            });
+        });
+    </script>
+}

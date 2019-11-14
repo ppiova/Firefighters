@@ -2,6 +2,7 @@
 using Firefighters.Web.Data.Entities;
 using Firefighters.Web.Helpers;
 using Firefighters.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace Firefighters.Web.Controllers
 {
+    [Authorize]
     public class ElementosController : Controller
     {
         private readonly DataContext _dataContext;
