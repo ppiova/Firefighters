@@ -2,6 +2,7 @@
 using Firefighters.Web.Data.Entities;
 using Firefighters.Web.Helpers;
 using Firefighters.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace Firefighters.Web.Controllers
 {
+    [Authorize]
     public class ElementosController : Controller
     {
         private readonly DataContext _dataContext;
@@ -44,6 +46,8 @@ namespace Firefighters.Web.Controllers
                 .Where(e => e.Activo == true && e.BajaFecha == null)
                 .Include(u => u.Ubicacion)
                 .Include(a => a.Area)
+                .Include(mo => mo.Modelo)
+                .Include(ma => ma.Marca)
                 .Include(i => i.ElementoImages)
                 
              );
@@ -55,6 +59,8 @@ namespace Firefighters.Web.Controllers
                 .Where(e => e.Activo == false || e.BajaFecha != null)
                 .Include(u => u.Ubicacion)
                 .Include(a => a.Area)
+                .Include(mo => mo.Modelo)
+                .Include(ma => ma.Marca)
                 .Include(i => i.ElementoImages)
                 );
         }
@@ -69,6 +75,8 @@ namespace Firefighters.Web.Controllers
             var elemento = await _dataContext.Elementos
                 .Include(u => u.Ubicacion)
                 .Include(a => a.Area)
+                .Include(mo => mo.Modelo)
+                .Include(ma => ma.Marca)
                 .Include(i => i.ElementoImages)
                 .Include(c => c.ElementoComprobantes)
 
@@ -90,6 +98,8 @@ namespace Firefighters.Web.Controllers
                 Ubicaciones = _combosHelper.GetComboUbicaciones(),
                 Estados = _combosHelper.GetComboEstadosElementos(),
                 Titulares = _combosHelper.GetComboTitulares(),
+                Marcas = _combosHelper.GetComboMarcas(),
+                Modelos = _combosHelper.GetComboModelos(),
                 Activo = true
             };
 

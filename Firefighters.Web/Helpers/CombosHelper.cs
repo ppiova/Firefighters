@@ -69,6 +69,44 @@ namespace Firefighters.Web.Helpers
             return list;
         }
 
+        public IEnumerable<SelectListItem> GetComboMarcas()
+        {
+            var list = _dataContext.Marcas
+              
+                .Select(p => new SelectListItem
+                {
+                    Text = p.MarcaElemento,
+                    Value = p.MarcaID.ToString()
+                }).OrderBy(p => p.Text).ToList();
+
+            list.Insert(0, new SelectListItem
+            {
+                Text = "(Seleccione una Marca...)",
+                Value = "0"
+            });
+
+            return list;
+        }
+
+        public IEnumerable<SelectListItem> GetComboModelos()
+        {
+            var list = _dataContext.Modelos
+
+                .Select(p => new SelectListItem
+                {
+                    Text = p.ModeloElemento,
+                    Value = p.ModeloID.ToString()
+                }).OrderBy(p => p.Text).ToList();
+
+            list.Insert(0, new SelectListItem
+            {
+                Text = "(Seleccione un Modelo...)",
+                Value = "0"
+            });
+
+            return list;
+        }
+
         public IEnumerable<SelectListItem> GetComboUbicaciones()
         {
             var list = _dataContext.Ubicaciones.Select(p => new SelectListItem

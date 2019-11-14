@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Firefighters.Web.Data;
 using Firefighters.Web.Data.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Firefighters.Web.Controllers
 {
+    [Authorize]
     public class UbicacionesController : Controller
     {
         private readonly DataContext _context;
