@@ -43,7 +43,7 @@ namespace Firefighters.Web.Controllers
                 }
             }
 
-            ModelState.AddModelError(string.Empty, "Failed to login.");
+            ModelState.AddModelError(string.Empty, "Login Incorrecto.");
             return View(model);
         }
 

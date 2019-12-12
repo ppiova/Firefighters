@@ -1,16 +1,17 @@
 ﻿@model Firefighters.Web.Models.LoginViewModel
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Ingresar FireFighters";
 }
 
-<h2>Login</h2>
-
+<h2 class="text-center">Login FireFighters</h2>
+<br />
+<br />
 <div class="row">
     <div class="col-md-4 offset-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly"></div>
             <div class="form-group">
-                <label asp-for="Username">Username</label>
+                <label asp-for="Username">Usuario</label>
                 <input asp-for="Username" class="form-control" />
                 <span asp-validation-for="Username" class="text-warning"></span>
             </div>
@@ -23,14 +24,14 @@
             <div class="form-group">
                 <div class="form-check">
                     <input asp-for="RememberMe" type="checkbox" class="form-check-input" />
-                    <label asp-for="RememberMe" class="form-check-label">Remember Me?</label>
+                    <label asp-for="RememberMe" class="form-check-label">Recordar</label>
                 </div>
                 <span asp-validation-for="RememberMe" class="text-warning"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Login" class="btn btn-success" />
-                <a asp-action="Register" class="btn btn-primary">Register New User</a>
-                <a asp-action="RecoverPassword" class="btn btn-link">Forgot your password?</a>
+            <div class="form-group text-center">
+                <input type="submit" value="Login" class="btn-lg btn-success" />
+                @*<a asp-action="Register" class="btn btn-primary">Registrar Nuevo Usuario</a>*@
+                @*<a asp-action="RecoverPassword" class="btn btn-link">¿Olvidó su contraseña?</a>*@
             </div>
         </form>
     </div>
