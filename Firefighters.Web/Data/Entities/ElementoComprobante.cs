@@ -10,7 +10,7 @@ namespace Firefighters.Web.Data.Entities
     {
         public int ElementoComprobanteId { get; set; }
 
-        [Display(Name = "Nombre Comprobante")]
+        [Display(Name = "Nombre")]
         public string ComprobanteNombre { get; set; }
 
         [Display(Name = "Comprobante")]

@@ -21,10 +21,12 @@ namespace Firefighters.Web.Helpers
         public IEnumerable<SelectListItem> GetComboEstadosElementos()
         {
             var estadosList = new List<SelectListItem>();
+
             foreach (Estado eVal in Enum.GetValues(typeof(Estado)))
-            {
+            {               
                 estadosList.Add(new SelectListItem { Text = Enum.GetName(typeof(Estado), eVal), Value = eVal.ToString()});
             }
+
             estadosList.Insert(0, new SelectListItem
             {
                 Text = "(Seleccione un Estado...)",

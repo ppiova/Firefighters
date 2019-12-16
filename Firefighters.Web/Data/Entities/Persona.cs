@@ -25,11 +25,11 @@ namespace Firefighters.Web.Data.Entities
         public string DNI { get; set; }
 
         [DataType(DataType.Date)]
-        [Display(Name = "Fecha Nacimiento")]
+        [Display(Name = "Nacimiento")]
         [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public DateTime? NacimientoFecha { get; set; }
 
-        [Display(Name = "Lugar Nacimiento")]
+        [Display(Name = "Lugar Nac.")]
         [MaxLength(100, ErrorMessage = "El {0} campo no puede tener más de {1} caracteres.")]
         public string LugarNacimiento { get; set; }
 
@@ -51,7 +51,7 @@ namespace Firefighters.Web.Data.Entities
         [Display(Name = "Grupo Sanguineo")]
         public string GrupoSanguineo { get; set; }
 
-        [Display(Name = "Factor Sanguineo")]
+        [Display(Name = "Factor")]
         public string FactorSanguineo { get; set; }
 
         public Int16 ?ObraSocialID { get; set; }
@@ -60,7 +60,7 @@ namespace Firefighters.Web.Data.Entities
         public string EstadoCivil { get; set; }
 
         [DataType(DataType.Date)]
-        [Display(Name = "Fecha Ingreso")]
+        [Display(Name = "Ingreso")]
         [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public DateTime? IngresoFecha { get; set; }
 

@@ -134,6 +134,8 @@ namespace Firefighters.Web.Controllers
             var elemento = await _dataContext.Elementos
                 .Include(e => e.Area)
                 .Include(e => e.Ubicacion)
+                .Include(m => m.Modelo)
+                .Include(m => m.Marca)
                 .FirstOrDefaultAsync(e => e.ElementoID == id.Value);
 
             if (elemento == null)
