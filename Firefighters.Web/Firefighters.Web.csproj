@@ -34,6 +34,13 @@
   </ItemGroup>
 
 
+  <ItemGroup>
+    <None Include="wwwroot\lib\jquery-easing\jquery.easing.compatibility.js" />
+    <None Include="wwwroot\lib\jquery-easing\jquery.easing.js" />
+    <None Include="wwwroot\lib\jquery-easing\jquery.easing.min.js" />
+  </ItemGroup>
+
+
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>
