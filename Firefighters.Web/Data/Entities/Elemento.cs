@@ -21,21 +21,17 @@ namespace Firefighters.Web.Data.Entities
         [MaxLength(50, ErrorMessage = "El {0} no debe tener mas de {1} caracteres.")]
         public string NroSerie { get; set; }
 
-       
-        //TODO: ver fechas formato
         [DataType(DataType.Date)]
         [Display(Name = "Fabricación")]
-        //[DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]
+    
         public DateTime? FabricacionFecha { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Compra")]
-        //[DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime? CompraFecha { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Vencimiento")]
-        //[DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime? VencimientoFecha { get; set; }
 
         [Display(Name = "Observaciones")]
@@ -47,7 +43,6 @@ namespace Firefighters.Web.Data.Entities
 
         [DataType(DataType.Date)]
         [Display(Name = "Baja")]
-        //[DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime? BajaFecha { get; set; }
 
 
