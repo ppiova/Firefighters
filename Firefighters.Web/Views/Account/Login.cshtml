@@ -1,40 +1,127 @@
-﻿@model Firefighters.Web.Models.LoginViewModel
-@{
-    ViewData["Title"] = "Login";
+﻿@{
+    Layout = null;
 }
+@model Firefighters.Web.Models.LoginViewModel
 
-<h2>Login</h2>
+<!DOCTYPE html>
+<html>
 
-<div class="row">
-    <div class="col-md-4 offset-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly"></div>
-            <div class="form-group">
-                <label asp-for="Username">Username</label>
-                <input asp-for="Username" class="form-control" />
-                <span asp-validation-for="Username" class="text-warning"></span>
-            </div>
-            <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-            <div class="form-group">
-                <label asp-for="Password">Password</label>
-                <input asp-for="Password" type="password" class="form-control" />
-                <span asp-validation-for="Password" class="text-warning"></span>
-            </div>
-            <div class="form-group">
-                <div class="form-check">
-                    <input asp-for="RememberMe" type="checkbox" class="form-check-input" />
-                    <label asp-for="RememberMe" class="form-check-label">Remember Me?</label>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no" />
+    <title>@ViewData["Title"] - Ingresar FireFighters</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link href="~/lib/fontawesome-free-5.11.2-web/css/all.css" rel="stylesheet" />
+
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+              crossorigin="anonymous"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
+    </environment>
+    <link href="~/lib/datatables/css/dataTables.bootstrap4.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/sb-admin-2.css" />
+
+</head>
+
+<body class="bg-gradient-primary">
+    <div class="container">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Bienvenido</h1>
+                                    </div>
+                                    <form method="post" class="user">
+                                       
+                                        <div class="form-group">
+                                            <label asp-for="Username">Usuario</label>
+                                            <input asp-for="Username" class="form-control" />
+                                            <span asp-validation-for="Username" class="text-warning"></span>
+                                        </div>
+                                        <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+                                        <div class="form-group">
+                                            <label asp-for="Password">Password</label>
+                                            <input asp-for="Password" type="password" class="form-control" />
+                                            <span asp-validation-for="Password" class="text-warning"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-check">
+                                                <input asp-for="RememberMe" type="checkbox" class="form-check-input" />
+                                                <label asp-for="RememberMe" class="form-check-label">Recordar</label>
+                                            </div>
+                                            <span asp-validation-for="RememberMe" class="text-warning"></span>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <input type="submit" value="Login" class="btn btn-primary btn-user btn-block" />
+                                            @*<a asp-action="Register" class="btn btn-primary">Registrar Nuevo Usuario</a>*@
+                                            @*<a asp-action="RecoverPassword" class="btn btn-link">¿Olvidó su contraseña?</a>*@
+                                        </div>
+
+                                    </form>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                    </div>
+                                    <div class="text-center">
+                                        <a class="small" href="register.html">Create an Account!</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <span asp-validation-for="RememberMe" class="text-warning"></span>
+
             </div>
-            <div class="form-group">
-                <input type="submit" value="Login" class="btn btn-success" />
-                <a asp-action="Register" class="btn btn-primary">Register New User</a>
-                <a asp-action="RecoverPassword" class="btn btn-link">Forgot your password?</a>
-            </div>
-        </form>
+
+        </div>
+
     </div>
-</div>
+
+
+
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+        <script src="~/lib/fontawesome-free-5.11.2-web/js/all.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
+        </script>
+    </environment>
+    <script src="~/js/sb-admin-2.js" asp-append-version="true"></script>
+   
+    <script src="~/lib/datatables/js/dataTables.bootstrap4.js"></script>
+
+   
+</body>
+</html>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

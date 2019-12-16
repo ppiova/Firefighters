@@ -29,7 +29,8 @@ namespace Firefighters.Web.Data
             await CheckRoles();
             //Creo un Admin y un Bombero
             await CheckUserAsync("1010", "Pablo", "Piovano", "ppiova@cablasociados.com", "3493415005", "Fader 1740", "Admin");
-            await CheckUserAsync("2020", "Pablo Angel", "Piova", "ppiova@hotmail.com", "34934150057", "Spilimbergo 581", "Bombero");
+            await CheckUserAsync("2030", "Pablo Angel", "Piova", "ppiova@hotmail.com", "34934150057", "Spilimbergo 581", "Bombero");
+            await CheckUserAsync("2020", "Mauro", "Zambon", "mdzambon@gmail.com", "34934150057", "Alen 1980", "Bombero");
 
         }
 

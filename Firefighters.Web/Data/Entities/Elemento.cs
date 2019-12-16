@@ -8,7 +8,7 @@ namespace Firefighters.Web.Data.Entities
 {
     public class Elemento
     {
-        [Display(Name = "Código Elemento")]
+        [Display(Name = "Código")]
         //[Required(ErrorMessage = "El campo {0} es Obligatorio.")]
         public int ElementoID { get; set; }
 
@@ -24,17 +24,17 @@ namespace Firefighters.Web.Data.Entities
        
         //TODO: ver fechas formato
         [DataType(DataType.Date)]
-        [Display(Name = "Fecha Fabricación")]
+        [Display(Name = "Fabricación")]
         //[DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]
         public DateTime? FabricacionFecha { get; set; }
 
         [DataType(DataType.Date)]
-        [Display(Name = "Fecha Compra")]
+        [Display(Name = "Compra")]
         //[DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime? CompraFecha { get; set; }
 
         [DataType(DataType.Date)]
-        [Display(Name = "Fecha Vencimiento")]
+        [Display(Name = "Vencimiento")]
         //[DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime? VencimientoFecha { get; set; }
 
@@ -46,7 +46,7 @@ namespace Firefighters.Web.Data.Entities
         public bool Activo { get; set; }
 
         [DataType(DataType.Date)]
-        [Display(Name = "Fecha Baja")]
+        [Display(Name = "Baja")]
         //[DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime? BajaFecha { get; set; }
 

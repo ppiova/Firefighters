@@ -19,13 +19,13 @@
             @Html.DisplayNameFor(model => model.Modelo)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Modelo)
+            @Html.DisplayFor(model => model.Modelo.ModeloElemento)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Marca)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Marca)
+            @Html.DisplayFor(model => model.Marca.MarcaElemento)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.NroSerie)
@@ -104,10 +104,11 @@
 </div>
 <hr />
 <div>
-    <a class="col-md-4" asp-action="Edit" asp-route-id="@Model.ElementoID">Editar</a>|
-    <a class="col-md-8" asp-action="AddImage" asp-route-id="@Model.ElementoID">Agregar Imagen</a>|
-    <a class="col-md-8" asp-action="AddComprobante" asp-route-id="@Model.ElementoID">Agregar Comprobante</a>|
-    <a class="col-md-12" asp-action="Index">Volver a la Lista</a>
+
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.ElementoID"><i class="fas fa-edit"></i>&nbsp;Editar </a>
+    <a class="btn btn-success" asp-action="AddImage" asp-route-id="@Model.ElementoID"><i class="fas fa-plus-square"></i>&nbsp;Imagen</a>
+    <a class="btn btn-success" asp-action="AddComprobante" asp-route-id="@Model.ElementoID"><i class="fas fa-plus-square"></i>&nbsp;Comprobante</a>
+    <a asp-action="Index" class="btn btn-info"><i class="fas fa-long-arrow-alt-left"></i>&nbsp;Volver Listado</a>
 </div>
 <hr />
 <br />

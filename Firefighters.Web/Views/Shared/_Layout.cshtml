@@ -2,13 +2,13 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no" />
     <title>@ViewData["Title"] - Firefighters.Web</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link href="~/lib/fontawesome-free-5.11.2-web/css/all.css" rel="stylesheet" />
-        <link href="~/lib/toastr.js/toastr.min.css" rel="stylesheet" />
+       
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -19,13 +19,14 @@
     </environment>
     <link href="~/lib/datatables/css/jquery.dataTables.css" rel="stylesheet" />
     <link href="~/lib/datatables/css/dataTables.bootstrap4.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/sb-admin-2.css" />
 </head>
-<body>
+<body class="bg-gradient-primary">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/images/logo.jpg" class="imagentopbar" alt="Bomberos Sunchales"></a>
+                @*<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/images/logo.jpg" class="imagentopbar" alt="Bomberos Sunchales"></a>*@
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-fire"></i> FIREFIGHTERS</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -34,13 +35,13 @@
                     <ul class="nav navbar-nav flex-grow-1">
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <a>Usuario: @User.Identity.Name </a>
+                            <a><i class="fas fa-user"></i>&nbsp @User.Identity.Name </a>
                             <a> &nbsp / &nbsp</a>
-                            <li><a asp-area="" asp-controller="Account" asp-action="Logout"> SALIR</a></li>
+                            <li><a asp-area="" asp-controller="Account" asp-action="Logout"> <i class="fas fa-sign-out-alt"></i>&nbsp SALIR</a></li>
                         }
                         else
                         {
-                            <li><a asp-area="" asp-controller="Account" asp-action="Login">INGRESAR</a></li>
+                            <li><a asp-area="" asp-controller="Account" asp-action="Login">&nbsp</a></li>
                         }
                     </ul>
                     <ul class="navbar-nav flex-grow-1">
@@ -56,9 +57,9 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Ubicaciones" asp-action="Index">Ubicaciones</a>
                             </li>
-                         }
+                        }
 
-                        </ul>
+                    </ul>
 
                 </div>
 
@@ -101,8 +102,6 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/datatables/js/jquery.dataTables.js"></script>
     <script src="~/lib/datatables/js/dataTables.bootstrap4.js"></script>
-    <script src="~/lib/toastr.js/toastr.min.js"></script>
-    <script src="~/lib/toastr.js/toastr.config.js"></script>
 
     @RenderSection("Scripts", required: false)
 </body>
