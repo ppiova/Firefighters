@@ -123,6 +123,21 @@ namespace Firefighters.Web.Migrations
                     b.ToTable("ElementoImages");
                 });
 
+            modelBuilder.Entity("Firefighters.Web.Data.Entities.Emergencia", b =>
+                {
+                    b.Property<short>("EmergenciaID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("MarcaElemento")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("EmergenciaID");
+
+                    b.ToTable("Emergencias");
+                });
+
             modelBuilder.Entity("Firefighters.Web.Data.Entities.Marca", b =>
                 {
                     b.Property<short>("MarcaID")
@@ -151,6 +166,51 @@ namespace Firefighters.Web.Migrations
                     b.HasKey("ModeloID");
 
                     b.ToTable("Modelos");
+                });
+
+            modelBuilder.Entity("Firefighters.Web.Data.Entities.Siniestro", b =>
+                {
+                    b.Property<int>("SiniestroID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Damnificado")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Denunciante")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("DirLocalidad")
+                        .HasMaxLength(50);
+
+                    b.Property<short?>("EmergenciaID");
+
+                    b.Property<DateTime>("FechaSiniestro");
+
+                    b.HasKey("SiniestroID");
+
+                    b.HasIndex("EmergenciaID");
+
+                    b.ToTable("Siniestros");
+                });
+
+            modelBuilder.Entity("Firefighters.Web.Data.Entities.SiniestroComprobante", b =>
+                {
+                    b.Property<int>("SiniestroComprobanteId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ComprobanteUrl");
+
+                    b.Property<int?>("SiniestroID");
+
+                    b.Property<string>("SiniestroNombre");
+
+                    b.HasKey("SiniestroComprobanteId");
+
+                    b.HasIndex("SiniestroID");
+
+                    b.ToTable("SiniestroComprobantes");
                 });
 
             modelBuilder.Entity("Firefighters.Web.Data.Entities.Ubicacion", b =>
@@ -375,6 +435,20 @@ namespace Firefighters.Web.Migrations
                     b.HasOne("Firefighters.Web.Data.Entities.Elemento", "Elemento")
                         .WithMany("ElementoImages")
                         .HasForeignKey("ElementoID");
+                });
+
+            modelBuilder.Entity("Firefighters.Web.Data.Entities.Siniestro", b =>
+                {
+                    b.HasOne("Firefighters.Web.Data.Entities.Emergencia", "Emergencia")
+                        .WithMany("Siniestros")
+                        .HasForeignKey("EmergenciaID");
+                });
+
+            modelBuilder.Entity("Firefighters.Web.Data.Entities.SiniestroComprobante", b =>
+                {
+                    b.HasOne("Firefighters.Web.Data.Entities.Siniestro", "Siniestro")
+                        .WithMany("SiniestroComprobante")
+                        .HasForeignKey("SiniestroID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

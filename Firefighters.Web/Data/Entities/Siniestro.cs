@@ -27,7 +27,8 @@ namespace Firefighters.Web.Data.Entities
         [MaxLength(50, ErrorMessage = "El {0} no debe tener mas de {1} caracteres.")]
         public string DirLocalidad { get; set; }
 
-        //TODO:Falta Agregar Tipos de Emergencia
-        //TODO:Falta agregar Comprobantes adjuntos asociados al siniestro.
+        public Emergencia Emergencia { get; set; }
+
+        public ICollection<SiniestroComprobante> SiniestroComprobante { get; set; }
     }
 }
