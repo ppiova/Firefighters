@@ -30,16 +30,16 @@
             </div>
         </div>}
 
-<div class="form-group">
-    <input type="submit" value="GUARDAR" class="btn btn-primary" /> |
-    <input  type="submit"  asp-action="BajaLogica" asp-route-id="@Model.ElementoID" value="NO Activo" class="btn small btn-danger " />
-</div>
-
+    <div class="form-group">
+        <input type="submit" value="Guardar" class="btn btn-primary btn-user btn-block" /> |
+        <input type="submit" asp-action="BajaLogica" asp-route-id="@Model.ElementoID" value="NO Activo" class="btn small btn-danger " />
+    </div>
+    <div>
+        <a asp-action="Index" class="btn btn-secondary btn-block"><i class="fas fa-long-arrow-alt-left"></i>&nbsp;Volver Listado</a>
+    </div>
 </form>
 
-<div>
-    <a asp-action="Index" class="btn btn-info"><i class="fas fa-long-arrow-alt-left"></i>&nbsp;Volver Listado</a>
-</div>
+
 
 
 @section Scripts {
