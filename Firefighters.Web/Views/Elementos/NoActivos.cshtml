@@ -10,7 +10,7 @@
     <a asp-action="Index">Volver a la Lista</a> 
     
 </p>
-<table id="myTableElementos" class="table table-striped table-bordered" style="width:100%">
+<table id="myTableElementosNA" class="table table-striped table-bordered" style="width:100%">
     <thead>
         <tr>
             <th>
@@ -19,31 +19,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.Descripcion)
             </th>
-            @*<th>
-            @Html.DisplayNameFor(model => model.Modelo)
-        </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Marca)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NroSerie)
             </th>
-
-            @*<th>
-            @Html.DisplayNameFor(model => model.FabricacionFecha)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CompraFecha)
-        </th>*@
-            @*<th>
-            @Html.DisplayNameFor(model => model.VencimientoFecha)
-        </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Observaciones)
             </th>
-            @*<th>
-            @Html.DisplayNameFor(model => model.Activo)
-        </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.BajaFecha)
             </th>
@@ -70,32 +54,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Descripcion)
             </td>
-            @*<td>
-            @Html.DisplayFor(modelItem => item.Modelo)
-        </td>*@
+         
             <td>
                 @Html.DisplayFor(modelItem => item.Marca)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NroSerie)
             </td>
-
-            @*<td>
-            @item.FabricacionFecha?.ToString("dd/MM/yyyy")
-        </td>*@
-            @*<td>
-
-            @item.CompraFecha?.ToString("dd/MM/yyyy")
-        </td>*@
-            @*<td>
-            @item.VencimientoFecha?.ToString("dd/MM/yyyy")
-        </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Observaciones)
             </td>
-            @*<td>
-               @Html.DisplayFor(modelItem => item.Activo)
-        </td>*@
             <td>
                 @item.BajaFecha?.ToString("dd/MM/yyyy")
             </td>
@@ -110,7 +78,7 @@
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ElementoID">Editar</a> |
-                @*<a asp-action="Details" asp-route-id="@item.ElementoID">Detalle</a> |*@
+             
                 <a asp-action="Delete" asp-route-id="@item.ElementoID">Eliminar</a>
             </td>
         </tr>
@@ -120,7 +88,7 @@
 @section Scripts{
     <script>
 			$(document).ready(function () {
-				$('#myTableElementos').DataTable();//myTable is the id of the table to be displayed as dataTable
+                $('#myTableElementosNA').DataTable();//myTable is the id of the table to be displayed as dataTable
 			});
     </script>
 }

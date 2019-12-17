@@ -5,7 +5,7 @@
 }
 
 <h2 class="text-center">ELEMENTOS</h2>
-@*TODO: ACOMODAR TABLA*@
+
 <p>
     <a asp-action="Create" class="btn btn-success"><i class="fas fa-plus-square"></i>&nbsp;Elemento</a>|
     <a asp-action="NoActivos">Ver Elementos no Activos</a>
@@ -14,39 +14,18 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ElementoID)
+                Código
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Descripcion)
             </th>
-            @*<th>
-            @Html.DisplayNameFor(model => model.Modelo)
-        </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Marca.MarcaElemento)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Modelo.ModeloElemento)
             </th>
-          
-            @*<th>
-            @Html.DisplayNameFor(model => model.FabricacionFecha)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CompraFecha)
-        </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.VencimientoFecha)
-            </th>
-            @*<th>
-            @Html.DisplayNameFor(model => model.Observaciones)
-        </th>*@
-            @*<th>
-            @Html.DisplayNameFor(model => model.Activo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BajaFecha)
-        </th>*@
+           
             <th>
                 @Html.DisplayNameFor(model => model.Area.AreaName)
             </th>
@@ -70,35 +49,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Descripcion)
             </td>
-            @*<td>
-            @Html.DisplayFor(modelItem => item.Modelo)
-        </td>*@
+        
             <td>
                 @Html.DisplayFor(modelItem => item.Marca.MarcaElemento)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Modelo.ModeloElemento)
             </td>
-
-            @*<td>
-            @item.FabricacionFecha?.ToString("dd/MM/yyyy")
-        </td>*@
-            @*<td>
-
-            @item.CompraFecha?.ToString("dd/MM/yyyy")
-        </td>*@
-            <td>
-                @item.VencimientoFecha?.ToString("dd/MM/yyyy")
-            </td>
-            @*<td>
-            @Html.DisplayFor(modelItem => item.Observaciones)
-        </td>*@
-            @*<td>
-            @Html.DisplayFor(modelItem => item.Activo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BajaFecha)
-        </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Area.AreaName)
             </td>
@@ -121,33 +78,10 @@
 <partial name="_DeleteDialog" />
 @section Scripts{
     <script>
-			$(document).ready(function () {
-                $('#myTableElementos').DataTable({
-                    language: {
-                        "decimal": "",
-                        "emptyTable": "No hay información",
-                        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-                        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-                        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
-                        "infoPostFix": "",
-                        "thousands": ",",
-                        "lengthMenu": "Mostrar _MENU_ Entradas",
-                        "loadingRecords": "Cargando...",
-                        "processing": "Procesando...",
-                        "search": "Buscar:",
-                        "zeroRecords": "Sin resultados encontrados",
-                        "paginate": {
-                            "first": "Primero",
-                            "last": "Ultimo",
-                            "next": "Siguiente",
-                            "previous": "Anterior"
-                        }
-                },
-                //myTable is the id of the table to be displayed as dataTable
-                });
+        $(document).ready(function () {
+            $('#myTableElementos').DataTable();
 
-
-                 // Delete item
+            // Delete item
             var item_to_delete;
 
             $('.deleteItem').click((e) => {
@@ -159,4 +93,6 @@
                 window.location.href = '/Elementos/Delete/' + item_to_delete;
 
             });
-    </script>}
+        });
+    </script>
+}

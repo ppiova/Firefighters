@@ -14,11 +14,9 @@
 
 
   <ItemGroup>
-    <PackageReference Include="MFramework.Services.Toastr" Version="1.0.20" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
-    <PackageReference Include="toastr" Version="2.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
     <PackageReference Include="xunit.extensibility.core" Version="2.4.1" />
   </ItemGroup>
 
@@ -32,7 +30,13 @@
     <Folder Include="wwwroot\files\Comprobantes\" />
     <Folder Include="wwwroot\images\Elementos\" />
     <Folder Include="wwwroot\images\home\" />
-    <Folder Include="wwwroot\images\Personas\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="wwwroot\lib\jquery-easing\jquery.easing.compatibility.js" />
+    <None Include="wwwroot\lib\jquery-easing\jquery.easing.js" />
+    <None Include="wwwroot\lib\jquery-easing\jquery.easing.min.js" />
   </ItemGroup>
 
 

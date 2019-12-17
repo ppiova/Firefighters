@@ -51,10 +51,12 @@ namespace Firefighters.Web.Helpers
             {
                 ElementoID = elemento.ElementoID,
                 Descripcion = elemento.Descripcion,
-                Marca = elemento.Marca,
+                
                 Marcas = _combosHelper.GetComboMarcas(),
-                Modelo = elemento.Modelo,
+                MarcaID = elemento.Marca.MarcaID,
+               
                 Modelos = _combosHelper.GetComboModelos(),
+                ModeloID = elemento.Modelo.ModeloID,
                 NroSerie = elemento.NroSerie,
                 FabricacionFecha = elemento.FabricacionFecha,
                 CompraFecha = elemento.CompraFecha,
