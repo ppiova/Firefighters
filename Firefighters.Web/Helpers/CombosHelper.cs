@@ -125,5 +125,23 @@ namespace Firefighters.Web.Helpers
 
             return list;
         }
+
+        public IEnumerable<SelectListItem> GetComboLocalidades()
+        {
+            var list = _dataContext.Localidades
+                .Select(p => new SelectListItem
+                {
+                    Text = p.NombreLocalidad,
+                    Value = p.LocalidadID.ToString()
+                }).OrderBy(p => p.Text).ToList();
+
+            list.Insert(0, new SelectListItem
+            {
+                Text = "(Seleccione una Localidad...)",
+                Value = "0"
+            });
+
+            return list;
+        }
     }
 }

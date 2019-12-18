@@ -138,6 +138,21 @@ namespace Firefighters.Web.Migrations
                     b.ToTable("Emergencias");
                 });
 
+            modelBuilder.Entity("Firefighters.Web.Data.Entities.Localidad", b =>
+                {
+                    b.Property<int>("LocalidadID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("NombreLocalidad")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("LocalidadID");
+
+                    b.ToTable("Localidades");
+                });
+
             modelBuilder.Entity("Firefighters.Web.Data.Entities.Marca", b =>
                 {
                     b.Property<short>("MarcaID")
@@ -180,16 +195,23 @@ namespace Firefighters.Web.Migrations
                     b.Property<string>("Denunciante")
                         .HasMaxLength(50);
 
-                    b.Property<string>("DirLocalidad")
+                    b.Property<string>("DirUbicación")
                         .HasMaxLength(50);
 
                     b.Property<short?>("EmergenciaID");
 
                     b.Property<DateTime>("FechaSiniestro");
 
+                    b.Property<int?>("LocalidadID");
+
+                    b.Property<string>("RutaKm")
+                        .HasMaxLength(10);
+
                     b.HasKey("SiniestroID");
 
                     b.HasIndex("EmergenciaID");
+
+                    b.HasIndex("LocalidadID");
 
                     b.ToTable("Siniestros");
                 });
@@ -442,6 +464,10 @@ namespace Firefighters.Web.Migrations
                     b.HasOne("Firefighters.Web.Data.Entities.Emergencia", "Emergencia")
                         .WithMany("Siniestros")
                         .HasForeignKey("EmergenciaID");
+
+                    b.HasOne("Firefighters.Web.Data.Entities.Localidad", "Localidad")
+                        .WithMany("Siniestros")
+                        .HasForeignKey("LocalidadID");
                 });
 
             modelBuilder.Entity("Firefighters.Web.Data.Entities.SiniestroComprobante", b =>

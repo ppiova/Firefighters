@@ -7,9 +7,13 @@ namespace Firefighters.Web.Helpers
     {
         IEnumerable<SelectListItem> GetComboAreas();
         IEnumerable<SelectListItem> GetComboEstadosElementos();
-        IEnumerable<SelectListItem> GetComboTitulares();
-        IEnumerable<SelectListItem> GetComboUbicaciones();
+        IEnumerable<SelectListItem> GetComboLocalidades();
         IEnumerable<SelectListItem> GetComboMarcas();
         IEnumerable<SelectListItem> GetComboModelos();
+        IEnumerable<SelectListItem> GetComboTitulares();
+        IEnumerable<SelectListItem> GetComboUbicaciones();
+       
+        
+
     }
 }
