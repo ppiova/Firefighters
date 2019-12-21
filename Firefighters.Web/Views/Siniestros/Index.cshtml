@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Firefighters.Web.Data.Entities.Siniestro>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaSiniestro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Denunciante)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Damnificado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DirUbicación)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RutaKm)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaSiniestro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Denunciante)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Damnificado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DirUbicación)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RutaKm)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.SiniestroID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.SiniestroID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.SiniestroID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
