@@ -11,8 +11,8 @@ namespace Firefighters.Web.Data.Entities
         [Display(Name = "Nro. Siniestro")]
         public int SiniestroID { get; set; }
 
-        [DataType(DataType.Date)]
-        [Display(Name = "Fecha")]
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Fecha y Hora")]
         public DateTime FechaSiniestro { get; set; }
 
         [Display(Name = "Denunciante")]
@@ -23,11 +23,19 @@ namespace Firefighters.Web.Data.Entities
         [MaxLength(50, ErrorMessage = "El {0} no debe tener mas de {1} caracteres.")]
         public string Damnificado { get; set; }
 
-        [Display(Name = "Dirección / Ubicaci{on")]
+        [Display(Name = "Dirección / Ubicación")]
         [MaxLength(50, ErrorMessage = "El {0} no debe tener mas de {1} caracteres.")]
-        public string DirLocalidad { get; set; }
+        public string DirUbicación { get; set; }
 
-        //TODO:Falta Agregar Tipos de Emergencia
-        //TODO:Falta agregar Comprobantes adjuntos asociados al siniestro.
+        public Localidad Localidad { get; set; }
+
+        [Display(Name = "Ruta / KM")]
+        [MaxLength(10, ErrorMessage = "El {0} no debe tener mas de {1} caracteres.")]
+        public string RutaKm { get; set; }
+
+        public Emergencia Emergencia { get; set; }
+        
+
+        public ICollection<SiniestroComprobante> SiniestroComprobante { get; set; }
     }
 }

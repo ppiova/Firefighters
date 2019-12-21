@@ -21,10 +21,7 @@ namespace Firefighters.Web.Data.Entities
 
         [Display(Name = "Lleva Inventario")]
         public bool LlevaInventario { get; set; }
-
-        ICollection<Area> Areas { get; set; }
-        ICollection<Ubicacion> Ubicaciones { get; set; }
-
+        
         public ICollection<Elemento> Elementos { get; set; }
 
 
