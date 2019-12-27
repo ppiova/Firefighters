@@ -18,6 +18,43 @@ namespace Firefighters.Web.Helpers
 
         }
 
+        public IEnumerable<SelectListItem> GetComboAreas()
+        {
+            var list = _dataContext.Areas
+                .Where(a => a.LlevaInventario == true)
+                .Select(p => new SelectListItem
+                {
+                    Text = p.AreaName,
+                    Value = p.AreaID.ToString()
+                }).OrderBy(p => p.Text).ToList();
+
+            list.Insert(0, new SelectListItem
+            {
+                Text = "(Seleccione un Area...)",
+                Value = "0"
+            });
+
+            return list;
+        }
+
+        public IEnumerable<SelectListItem> GetComboEmergencias()
+        {
+            var list = _dataContext.Emergencias
+                .Select(p => new SelectListItem
+                {
+                    Text = p.TipoEmergencia,
+                    Value = p.EmergenciaID.ToString()
+                }).OrderBy(p => p.Text).ToList();
+
+            list.Insert(0, new SelectListItem
+            {
+                Text = "(Seleccione una Emergencia...)",
+                Value = "0"
+            });
+
+            return list;
+        }
+
         public IEnumerable<SelectListItem> GetComboEstadosElementos()
         {
             var estadosList = new List<SelectListItem>();
@@ -36,35 +73,18 @@ namespace Firefighters.Web.Helpers
             return estadosList;
         }
 
-        public IEnumerable<SelectListItem> GetComboTitulares()
+        public IEnumerable<SelectListItem> GetComboLocalidades()
         {
-            var titularesList = new List<SelectListItem>();
-            foreach (Titular eVal in Enum.GetValues(typeof(Titular)))
-            {
-                titularesList.Add(new SelectListItem { Text = Enum.GetName(typeof(Titular), eVal), Value = eVal.ToString() });
-            }
-            titularesList.Insert(0, new SelectListItem
-            {
-                Text = "(Seleccione un Titular...)",
-                Value = "0"
-            });
-
-            return titularesList;
-        }
-
-        public IEnumerable<SelectListItem> GetComboAreas()
-        {
-            var list = _dataContext.Areas
-                .Where (a => a.LlevaInventario == true)
+            var list = _dataContext.Localidades
                 .Select(p => new SelectListItem
-            {
-                Text = p.AreaName,
-                Value = p.AreaID.ToString()
-            }).OrderBy(p => p.Text).ToList();
+                {
+                    Text = p.NombreLocalidad,
+                    Value = p.LocalidadID.ToString()
+                }).OrderBy(p => p.Text).ToList();
 
             list.Insert(0, new SelectListItem
             {
-                Text = "(Seleccione un Area...)",
+                Text = "(Seleccione una Localidad...)",
                 Value = "0"
             });
 
@@ -74,7 +94,7 @@ namespace Firefighters.Web.Helpers
         public IEnumerable<SelectListItem> GetComboMarcas()
         {
             var list = _dataContext.Marcas
-              
+
                 .Select(p => new SelectListItem
                 {
                     Text = p.MarcaElemento,
@@ -109,6 +129,22 @@ namespace Firefighters.Web.Helpers
             return list;
         }
 
+        public IEnumerable<SelectListItem> GetComboTitulares()
+        {
+            var titularesList = new List<SelectListItem>();
+            foreach (Titular eVal in Enum.GetValues(typeof(Titular)))
+            {
+                titularesList.Add(new SelectListItem { Text = Enum.GetName(typeof(Titular), eVal), Value = eVal.ToString() });
+            }
+            titularesList.Insert(0, new SelectListItem
+            {
+                Text = "(Seleccione un Titular...)",
+                Value = "0"
+            });
+
+            return titularesList;
+        }
+        
         public IEnumerable<SelectListItem> GetComboUbicaciones()
         {
             var list = _dataContext.Ubicaciones.Select(p => new SelectListItem
@@ -126,22 +162,8 @@ namespace Firefighters.Web.Helpers
             return list;
         }
 
-        public IEnumerable<SelectListItem> GetComboLocalidades()
-        {
-            var list = _dataContext.Localidades
-                .Select(p => new SelectListItem
-                {
-                    Text = p.NombreLocalidad,
-                    Value = p.LocalidadID.ToString()
-                }).OrderBy(p => p.Text).ToList();
+        
 
-            list.Insert(0, new SelectListItem
-            {
-                Text = "(Seleccione una Localidad...)",
-                Value = "0"
-            });
-
-            return list;
-        }
+        
     }
 }
