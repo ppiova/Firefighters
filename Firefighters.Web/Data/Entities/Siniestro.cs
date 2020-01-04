@@ -11,23 +11,45 @@ namespace Firefighters.Web.Data.Entities
         [Display(Name = "Nro. Siniestro")]
         public int SiniestroID { get; set; }
 
-        [DataType(DataType.Date)]
-        [Display(Name = "Fecha")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy HH:mm:ss}")]
+        [Display(Name = "Fecha y Hora")]
         public DateTime FechaSiniestro { get; set; }
 
         [Display(Name = "Denunciante")]
         [MaxLength(50, ErrorMessage = "El {0} no debe tener mas de {1} caracteres.")]
         public string Denunciante { get; set; }
 
+        [Display(Name = "Teléfono Denunciante")]
+        [MaxLength(50, ErrorMessage = "El {0} no debe tener mas de {1} caracteres.")]
+        public string TelDeununciante { get; set; }
+
         [Display(Name = "Damnificado")]
         [MaxLength(50, ErrorMessage = "El {0} no debe tener mas de {1} caracteres.")]
         public string Damnificado { get; set; }
 
-        [Display(Name = "Dirección / Ubicaci{on")]
+        [Display(Name = "Teléfono Damnificado")]
         [MaxLength(50, ErrorMessage = "El {0} no debe tener mas de {1} caracteres.")]
-        public string DirLocalidad { get; set; }
+        public string TelDamnificado { get; set; }
 
-        //TODO:Falta Agregar Tipos de Emergencia
-        //TODO:Falta agregar Comprobantes adjuntos asociados al siniestro.
+        [Display(Name = "Dirección / Ubicación")]
+        [MaxLength(50, ErrorMessage = "El {0} no debe tener mas de {1} caracteres.")]
+        public string DirUbicación { get; set; }
+
+        public Localidad Localidad { get; set; }
+
+        [Display(Name = "Ruta / KM")]
+        [MaxLength(10, ErrorMessage = "El {0} no debe tener mas de {1} caracteres.")]
+        public string RutaKm { get; set; }
+
+        [Display(Name = "Observaciones")]
+        [MaxLength(500, ErrorMessage = "El {0} no debe tener mas de {1} caracteres.")]
+        public string Observaciones { get; set; }
+
+
+        public Emergencia Emergencia { get; set; }
+        
+
+        public ICollection<SiniestroComprobante> SiniestroComprobante { get; set; }
     }
 }

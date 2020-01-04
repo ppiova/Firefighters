@@ -27,12 +27,18 @@ namespace Firefighters.Web.Data
             await CheckMarcas();
             await CheckModelos();
             await CheckRoles();
+            
             //Creo un Admin y un Bombero
             await CheckUserAsync("1010", "Pablo", "Piovano", "ppiova@cablasociados.com", "3493415005", "Fader 1740", "Admin");
             await CheckUserAsync("2030", "Pablo Angel", "Piova", "ppiova@hotmail.com", "34934150057", "Spilimbergo 581", "Bombero");
             await CheckUserAsync("2020", "Mauro", "Zambon", "mdzambon@gmail.com", "34934150057", "Alen 1980", "Bombero");
 
+
+            await CheckLocalidades();
+            await CheckEmergencias();
         }
+
+     
 
         public async Task CheckModelos()
         {
@@ -150,5 +156,41 @@ namespace Firefighters.Web.Data
             return user;
         }
 
+        private async Task CheckLocalidades()
+        {
+            if (!_context.Localidades.Any())
+            {
+                _context.Localidades.Add(new Entities.Localidad { NombreLocalidad = "Sunchales" });
+                _context.Localidades.Add(new Entities.Localidad { NombreLocalidad = "Tacural" });
+                _context.Localidades.Add(new Entities.Localidad { NombreLocalidad = "Tacurales" });
+                _context.Localidades.Add(new Entities.Localidad { NombreLocalidad = "Ataliva" });
+                _context.Localidades.Add(new Entities.Localidad { NombreLocalidad = "Colonia Aldao" });
+                _context.Localidades.Add(new Entities.Localidad { NombreLocalidad = "Virginia" });
+                _context.Localidades.Add(new Entities.Localidad { NombreLocalidad = "Ramona" });
+                _context.Localidades.Add(new Entities.Localidad { NombreLocalidad = "Raquel" });
+                _context.Localidades.Add(new Entities.Localidad { NombreLocalidad = "Colonia Bicha" });
+                _context.Localidades.Add(new Entities.Localidad { NombreLocalidad = "Colonia Bossi" });
+                _context.Localidades.Add(new Entities.Localidad { NombreLocalidad = "Eusebia" });
+
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        private async Task CheckEmergencias()
+        {
+            if (!_context.Emergencias.Any())
+            {
+                _context.Emergencias.Add(new Entities.Emergencia { TipoEmergencia = "Incencio Rural" });
+                _context.Emergencias.Add(new Entities.Emergencia { TipoEmergencia = "Incendio Estructural (casa / local comercial)" });
+                _context.Emergencias.Add(new Entities.Emergencia { TipoEmergencia = "Incendio Industrial" });
+                _context.Emergencias.Add(new Entities.Emergencia { TipoEmergencia = "Incendio sobre Vehículos" });
+                _context.Emergencias.Add(new Entities.Emergencia { TipoEmergencia = "Accidente" });
+                _context.Emergencias.Add(new Entities.Emergencia { TipoEmergencia = "Rescate (animales / personas)" });
+                _context.Emergencias.Add(new Entities.Emergencia { TipoEmergencia = "Incidente MAT-PEL" });
+                _context.Emergencias.Add(new Entities.Emergencia { TipoEmergencia = "Apoyo a otro Cuartel" });
+
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }
