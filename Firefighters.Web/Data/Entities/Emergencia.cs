@@ -13,7 +13,7 @@ namespace Firefighters.Web.Data.Entities
         [Display(Name = "Emergencia")]
         [MaxLength(50, ErrorMessage = "El {0} campo no debe tener más de {1} caractéres.")]
         [Required(ErrorMessage = "El campo {0} es Obligatorio.")]
-        public string MarcaElemento { get; set; }
+        public string TipoEmergencia { get; set; }
 
         public ICollection<Siniestro> Siniestros { get; set; }
     }

@@ -129,7 +129,7 @@ namespace Firefighters.Web.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("MarcaElemento")
+                    b.Property<string>("TipoEmergencia")
                         .IsRequired()
                         .HasMaxLength(50);
 
@@ -204,8 +204,17 @@ namespace Firefighters.Web.Migrations
 
                     b.Property<int?>("LocalidadID");
 
+                    b.Property<string>("Observaciones")
+                        .HasMaxLength(500);
+
                     b.Property<string>("RutaKm")
                         .HasMaxLength(10);
+
+                    b.Property<string>("TelDamnificado")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("TelDeununciante")
+                        .HasMaxLength(50);
 
                     b.HasKey("SiniestroID");
 

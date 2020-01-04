@@ -1,52 +1,24 @@
-﻿@model Firefighters.Web.Data.Entities.Siniestro
+﻿@model Firefighters.Web.Models.SiniestroViewModel
 
-@{
-    ViewData["Title"] = "Create";
-}
+<h4>Alta de Nuevo Siniestro</h4>
 
-<h1>Create</h1>
-
-<h4>Siniestro</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="FechaSiniestro" class="control-label"></label>
-                <input asp-for="FechaSiniestro" class="form-control" />
-                <span asp-validation-for="FechaSiniestro" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Denunciante" class="control-label"></label>
-                <input asp-for="Denunciante" class="form-control" />
-                <span asp-validation-for="Denunciante" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Damnificado" class="control-label"></label>
-                <input asp-for="Damnificado" class="form-control" />
-                <span asp-validation-for="Damnificado" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DirUbicación" class="control-label"></label>
-                <input asp-for="DirUbicación" class="form-control" />
-                <span asp-validation-for="DirUbicación" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RutaKm" class="control-label"></label>
-                <input asp-for="RutaKm" class="form-control" />
-                <span asp-validation-for="RutaKm" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <partial name="_Siniestro" />
+
+    <div class="form-group col-md-4">
+        <input type="submit" value="Crear" class="btn btn-primary btn-user btn-block" />
+    </div>
+    <div class="col-md-4">
+        <a asp-action="Index" class="btn btn-secondary btn-block"><i class="fas fa-long-arrow-alt-left"></i>&nbsp;Volver Listado</a>
+    </div>
+</form>
+
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

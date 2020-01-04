@@ -6,6 +6,7 @@ namespace Firefighters.Web.Helpers
     public interface ICombosHelper
     {
         IEnumerable<SelectListItem> GetComboAreas();
+        IEnumerable<SelectListItem> GetComboEmergencias();
         IEnumerable<SelectListItem> GetComboEstadosElementos();
         IEnumerable<SelectListItem> GetComboLocalidades();
         IEnumerable<SelectListItem> GetComboMarcas();

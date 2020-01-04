@@ -7,22 +7,46 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Firefighters.Web.Data;
 using Firefighters.Web.Data.Entities;
+using Firefighters.Web.Helpers;
+using Microsoft.AspNetCore.Hosting;
+using Firefighters.Web.Models;
 
 namespace Firefighters.Web.Controllers
 {
     public class SiniestrosController : Controller
     {
-        private readonly DataContext _context;
+        
+        private readonly DataContext _dataContext;
+        private readonly ICombosHelper _combosHelper;
+        private readonly IConverterHelper _converterHelper;
+        private readonly IImageHelper _imageHelper;
+        private readonly IComprobanteHelper _comprobanteHelper;
+        private IHostingEnvironment _env { get; }
 
-        public SiniestrosController(DataContext context)
+        public SiniestrosController(DataContext context, ICombosHelper combosHelper,
+                                               IConverterHelper converterHelper,
+                                               IImageHelper imageHelper,
+                                               IComprobanteHelper comprobanteHelper,
+                                               IHostingEnvironment env)
         {
-            _context = context;
+            _dataContext = context;
+            _combosHelper = combosHelper;
+            _converterHelper = converterHelper;
+            _imageHelper = imageHelper;
+            _comprobanteHelper = comprobanteHelper;
+            _env = env;
         }
 
         // GET: Siniestros
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Siniestros.ToListAsync());
+            return View(_dataContext.Siniestros
+                  //.Where(e => e.Activo == true && e.BajaFecha == null)
+                  .Include(l => l.Localidad)
+                  .Include(e => e.Emergencia)
+                
+
+               );
         }
 
         // GET: Siniestros/Details/5
@@ -33,7 +57,7 @@ namespace Firefighters.Web.Controllers
                 return NotFound();
             }
 
-            var siniestro = await _context.Siniestros
+            var siniestro = await _dataContext.Siniestros
                 .FirstOrDefaultAsync(m => m.SiniestroID == id);
             if (siniestro == null)
             {
@@ -46,7 +70,14 @@ namespace Firefighters.Web.Controllers
         // GET: Siniestros/Create
         public IActionResult Create()
         {
-            return View();
+            var view = new SiniestroViewModel
+            {
+                Localidades = _combosHelper.GetComboLocalidades(),
+                Emergencias = _combosHelper.GetComboEmergencias()
+               
+            };
+
+            return View(view);
         }
 
         // POST: Siniestros/Create
@@ -58,8 +89,8 @@ namespace Firefighters.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(siniestro);
-                await _context.SaveChangesAsync();
+                _dataContext.Add(siniestro);
+                await _dataContext.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(siniestro);
@@ -73,7 +104,7 @@ namespace Firefighters.Web.Controllers
                 return NotFound();
             }
 
-            var siniestro = await _context.Siniestros.FindAsync(id);
+            var siniestro = await _dataContext.Siniestros.FindAsync(id);
             if (siniestro == null)
             {
                 return NotFound();
@@ -97,8 +128,8 @@ namespace Firefighters.Web.Controllers
             {
                 try
                 {
-                    _context.Update(siniestro);
-                    await _context.SaveChangesAsync();
+                    _dataContext.Update(siniestro);
+                    await _dataContext.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -124,7 +155,7 @@ namespace Firefighters.Web.Controllers
                 return NotFound();
             }
 
-            var siniestro = await _context.Siniestros
+            var siniestro = await _dataContext.Siniestros
                 .FirstOrDefaultAsync(m => m.SiniestroID == id);
             if (siniestro == null)
             {
@@ -139,15 +170,15 @@ namespace Firefighters.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var siniestro = await _context.Siniestros.FindAsync(id);
-            _context.Siniestros.Remove(siniestro);
-            await _context.SaveChangesAsync();
+            var siniestro = await _dataContext.Siniestros.FindAsync(id);
+            _dataContext.Siniestros.Remove(siniestro);
+            await _dataContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool SiniestroExists(int id)
         {
-            return _context.Siniestros.Any(e => e.SiniestroID == id);
+            return _dataContext.Siniestros.Any(e => e.SiniestroID == id);
         }
     }
 }

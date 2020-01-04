@@ -23,7 +23,6 @@ namespace Firefighters.Web.Data.Entities
 
         [DataType(DataType.Date)]
         [Display(Name = "Fabricación")]
-    
         public DateTime? FabricacionFecha { get; set; }
 
         [DataType(DataType.Date)]
