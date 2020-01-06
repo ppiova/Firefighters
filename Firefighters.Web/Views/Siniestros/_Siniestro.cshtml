@@ -48,10 +48,17 @@
 
 </div>
 <div class="form-row">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-3">
         <label asp-for="FechaSiniestro" class="control-label"></label>
-        <input asp-for="FechaSiniestro" class="form-control" id="picker" />
+        <input asp-for="FechaSiniestro" class="form-control" />
         <span asp-validation-for="FechaSiniestro" class="text-danger"></span>
+
+    </div>
+    <div class="form-group col-md-3">
+        <label asp-for="HoraSiniestro" class="control-label"></label>
+        <input asp-for="HoraSiniestro" class="form-control" />
+        <span asp-validation-for="HoraSiniestro" class="text-danger"></span>
+
     </div>
     <div class="form-group col-md-6">
         <label asp-for="EmergenciaID" class="control-label"></label>
@@ -67,4 +74,6 @@
         <span asp-validation-for="Observaciones" class="text-danger"></span>
     </div>
 </div>
+
+
 

@@ -11,10 +11,13 @@ namespace Firefighters.Web.Data.Entities
         [Display(Name = "Nro. Siniestro")]
         public int SiniestroID { get; set; }
 
-        [DataType(DataType.DateTime)]
-        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy HH:mm:ss}")]
-        [Display(Name = "Fecha y Hora")]
-        public DateTime FechaSiniestro { get; set; }
+        [DataType(DataType.Date)]
+        [Display(Name = "Fecha Sinientro")]
+        public DateTime? FechaSiniestro { get; set; }
+
+        [DataType(DataType.Time)]
+        [Display(Name = "Hora Sinientro")]
+        public DateTime? HoraSiniestro { get; set; }
 
         [Display(Name = "Denunciante")]
         [MaxLength(50, ErrorMessage = "El {0} no debe tener mas de {1} caracteres.")]
