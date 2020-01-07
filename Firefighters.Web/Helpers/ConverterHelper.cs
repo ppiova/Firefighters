@@ -43,7 +43,27 @@ namespace Firefighters.Web.Helpers
 
             };
         }
-              
+
+        public async Task<Siniestro> ToSiniestroAsync(SiniestroViewModel view, bool isNew)
+        {
+            return new Siniestro
+            {
+                SiniestroID = isNew ? 0 : view.SiniestroID,
+                Denunciante = view.Denunciante,
+                TelDeununciante = view.TelDeununciante,
+                Damnificado = view.Damnificado,
+                TelDamnificado = view.Damnificado,
+                DirUbicación = view.DirUbicación,
+                Localidad = await _dataContext.Localidades.FindAsync(view.LocalidadID),
+                RutaKm = view.RutaKm,
+                FechaSiniestro = view.FechaSiniestro,
+                HoraSiniestro = view.HoraSiniestro,
+                Emergencia =   await _dataContext.Emergencias.FindAsync(view.EmergenciaID),
+                Observaciones = view.Observaciones
+
+            };
+        }
+
 
         public ElementoViewModel ToElementoViewModel(Elemento elemento)
         {
@@ -76,5 +96,7 @@ namespace Firefighters.Web.Helpers
                 UbicacionId = elemento.Ubicacion.UbicacionID,
             };
         }
+
+
     }
 }

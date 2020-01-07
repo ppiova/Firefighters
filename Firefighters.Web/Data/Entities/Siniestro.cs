@@ -12,6 +12,7 @@ namespace Firefighters.Web.Data.Entities
         public int SiniestroID { get; set; }
 
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [Display(Name = "Fecha Sinientro")]
         public DateTime? FechaSiniestro { get; set; }
 
