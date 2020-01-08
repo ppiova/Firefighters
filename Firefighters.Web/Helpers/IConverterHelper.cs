@@ -11,5 +11,8 @@ namespace Firefighters.Web.Helpers
         //convert Elemento to ElementoVM
         ElementoViewModel ToElementoViewModel(Elemento elemento);
 
+        //convert SiniestroVM to Siniestro
+        Task<Siniestro> ToSiniestroAsync(SiniestroViewModel view, bool isNew);
+
     }
 }
