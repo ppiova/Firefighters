@@ -38,13 +38,12 @@ namespace Firefighters.Web.Controllers
         }
 
         // GET: Siniestros
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             return View(_dataContext.Siniestros
-                  //.Where(e => e.Activo == true && e.BajaFecha == null)
                   .Include(l => l.Localidad)
                   .Include(e => e.Emergencia)
-                
+
 
                );
         }
@@ -80,20 +79,19 @@ namespace Firefighters.Web.Controllers
             return View(view);
         }
 
-        // POST: Siniestros/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SiniestroID,FechaSiniestro,Denunciante,Damnificado,DirUbicación,RutaKm")] Siniestro siniestro)
+        public async Task<IActionResult> Create(SiniestroViewModel model)
         {
             if (ModelState.IsValid)
             {
+                var siniestro = await _converterHelper.ToSiniestroAsync(model, true);
+
                 _dataContext.Add(siniestro);
                 await _dataContext.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(siniestro);
+            return View(model);
         }
 
         // GET: Siniestros/Edit/5

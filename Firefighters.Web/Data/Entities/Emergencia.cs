@@ -8,7 +8,7 @@ namespace Firefighters.Web.Data.Entities
 {
     public class Emergencia
     {
-        public Int16 EmergenciaID { get; set; }
+        public int EmergenciaID { get; set; }
 
         [Display(Name = "Emergencia")]
         [MaxLength(50, ErrorMessage = "El {0} campo no debe tener más de {1} caractéres.")]

@@ -7,8 +7,7 @@
 <h2 class="text-center">ELEMENTOS NO ACTIVOS</h2>
 @*TODO: ACOMODAR TABLA*@
 <p>
-    <a asp-action="Index">Volver a la Lista</a> 
-    
+    <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-long-arrow-alt-left"></i>&nbsp;Volver Listado</a> 
 </p>
 <table id="myTableElementosNA" class="table table-striped table-bordered" style="width:100%">
     <thead>
@@ -56,7 +55,7 @@
             </td>
          
             <td>
-                @Html.DisplayFor(modelItem => item.Marca)
+                @Html.DisplayFor(modelItem => item.Marca.MarcaElemento)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NroSerie)
@@ -77,9 +76,8 @@
                 @Html.DisplayFor(modelItem => item.Estado)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ElementoID">Editar</a> |
-             
-                <a asp-action="Delete" asp-route-id="@item.ElementoID">Eliminar</a>
+                <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.ElementoID"><i class="fas fa-edit"></i> </a>
+                <a asp-action="Details" class="btn btn-info" asp-route-id="@item.ElementoID"><i class="fas fa-receipt"></i> </a>
             </td>
         </tr>
         }

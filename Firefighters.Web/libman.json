@@ -7,8 +7,20 @@
       "destination": "wwwroot/lib/datatables/"
     },
     {
-      "library": "toastr.js@2.1.4",
-      "destination": "wwwroot/lib/toastr.js/"
+      "library": "jquery-datetimepicker@2.5.20",
+      "destination": "wwwroot/lib/jquery-datetimepicker/"
+    },
+    {
+      "library": "moment.js@2.24.0",
+      "destination": "wwwroot/lib/moment.js/"
     }
   ]
 }
+//@*Right-click the project in the Solution Explorer. Select Add > Client-Side Library.
+//    Make sure the “Provider” is cdnjs.
+//    Search for “jquery-datetimepicker”.
+//    Select Include all library files.
+//    Search for “moment.js”.*@
+
+//https://caseyobrien.co/code/datetimepicker-dot-net-core/
+ 

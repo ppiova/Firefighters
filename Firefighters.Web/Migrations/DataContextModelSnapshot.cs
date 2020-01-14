@@ -202,6 +202,8 @@ namespace Firefighters.Web.Migrations
 
                     b.Property<DateTime>("FechaSiniestro");
 
+                    b.Property<DateTime>("HoraSiniestro");
+
                     b.Property<int?>("LocalidadID");
 
                     b.Property<string>("Observaciones")

@@ -103,15 +103,18 @@
     </dl>
 </div>
 <hr class="sidebar-divider">
-<div>
 
-    <a class="btn btn-primary col-4" asp-action="Edit" asp-route-id="@Model.ElementoID"><i class="fas fa-edit"></i>&nbsp;Editar </a>
-    <a asp-action="Index" class="btn btn-secondary col-4"><i class="fas fa-long-arrow-alt-left"></i>&nbsp;Volver Listado</a>
-    <hr class="sidebar-divider">
-    <a class="btn btn-success col-4" asp-action="AddImage" asp-route-id="@Model.ElementoID"><i class="fas fa-paperclip"></i>&nbsp;Imagen</a>
-    <a class="btn btn-success col-4" asp-action="AddComprobante" asp-route-id="@Model.ElementoID"><i class="fas fa-paperclip"></i>&nbsp;Comprobante</a>
+@if (Model.BajaFecha == null)
+{
+    <div>
 
-</div>
+        <a class="btn btn-primary col-4" asp-action="Edit" asp-route-id="@Model.ElementoID"><i class="fas fa-edit"></i>&nbsp;Editar </a>
+        <a asp-action="Index" class="btn btn-secondary col-4"><i class="fas fa-long-arrow-alt-left"></i>&nbsp;Volver Listado</a>
+        <hr class="sidebar-divider">
+        <a class="btn btn-success col-4" asp-action="AddImage" asp-route-id="@Model.ElementoID"><i class="fas fa-paperclip"></i>&nbsp;Imagen</a>
+        <a class="btn btn-success col-4" asp-action="AddComprobante" asp-route-id="@Model.ElementoID"><i class="fas fa-paperclip"></i>&nbsp;Comprobante</a>
+
+    </div> 
 <hr class="sidebar-divider">
 <br />
 <div class="row">
@@ -200,7 +203,11 @@
 
 </div>
 
-
+}
+@if (Model.BajaFecha != null)
+{
+    <a asp-action="NoActivos" class="btn btn-secondary col-4"><i class="fas fa-long-arrow-alt-left"></i>&nbsp;Volver Listado Bajas</a>
+}
 <partial name="_DeleteDialog" />
 
 
