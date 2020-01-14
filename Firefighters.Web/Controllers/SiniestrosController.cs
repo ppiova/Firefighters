@@ -57,6 +57,8 @@ namespace Firefighters.Web.Controllers
             }
 
             var siniestro = await _dataContext.Siniestros
+                .Include(l => l.Localidad)
+                .Include(e => e.Emergencia)
                 .FirstOrDefaultAsync(m => m.SiniestroID == id);
             if (siniestro == null)
             {
@@ -102,36 +104,36 @@ namespace Firefighters.Web.Controllers
                 return NotFound();
             }
 
-            var siniestro = await _dataContext.Siniestros.FindAsync(id);
+            var siniestro = await _dataContext.Siniestros
+                .Include(e => e.Localidad)
+                .Include(e => e.Emergencia)
+                .FirstOrDefaultAsync(e => e.SiniestroID == id.Value);
+
             if (siniestro == null)
             {
                 return NotFound();
             }
-            return View(siniestro);
+            var view = _converterHelper.ToSiniestroViewModel(siniestro);
+            return View(view);
         }
-
-        // POST: Siniestros/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+           
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SiniestroID,FechaSiniestro,Denunciante,Damnificado,DirUbicación,RutaKm")] Siniestro siniestro)
+        public async Task<IActionResult> Edit(SiniestroViewModel model)
         {
-            if (id != siniestro.SiniestroID)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _dataContext.Update(siniestro);
+                    var siniestro = await _converterHelper.ToSiniestroAsync(model, false);
+                    siniestro.SiniestroID = model.SiniestroID;
+
+                    _dataContext.Siniestros.Update(siniestro);
                     await _dataContext.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SiniestroExists(siniestro.SiniestroID))
+                    if (!SiniestroExists(model.SiniestroID))
                     {
                         return NotFound();
                     }
@@ -142,7 +144,11 @@ namespace Firefighters.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(siniestro);
+            model.Emergencias = _combosHelper.GetComboEmergencias();
+            model.Localidades = _combosHelper.GetComboLocalidades();
+           
+
+            return View(model);
         }
 
         // GET: Siniestros/Delete/5

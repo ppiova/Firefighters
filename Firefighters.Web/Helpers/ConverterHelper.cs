@@ -17,8 +17,6 @@ namespace Firefighters.Web.Helpers
             _combosHelper = combosHelper;
         }
 
-
-
         public async Task<Elemento> ToElementoAsync(ElementoViewModel view, bool isNew)
         {
             return new Elemento
@@ -52,7 +50,7 @@ namespace Firefighters.Web.Helpers
                 Denunciante = view.Denunciante,
                 TelDeununciante = view.TelDeununciante,
                 Damnificado = view.Damnificado,
-                TelDamnificado = view.Damnificado,
+                TelDamnificado = view.TelDamnificado,
                 DirUbicación = view.DirUbicación,
                 Localidad = await _dataContext.Localidades.FindAsync(view.LocalidadID),
                 RutaKm = view.RutaKm,
@@ -97,6 +95,27 @@ namespace Firefighters.Web.Helpers
             };
         }
 
+        public SiniestroViewModel ToSiniestroViewModel(Siniestro siniestro)
+        {
+            return new SiniestroViewModel
+            {
+                SiniestroID = siniestro.SiniestroID,
+                FechaSiniestro = siniestro.FechaSiniestro,
+                HoraSiniestro = siniestro.HoraSiniestro,
+                Denunciante = siniestro.Denunciante,
+                TelDeununciante = siniestro.TelDeununciante,
+                Damnificado = siniestro.Damnificado,
+                TelDamnificado = siniestro.TelDamnificado,
+                DirUbicación = siniestro.DirUbicación,
+                RutaKm = siniestro.RutaKm,
+                Observaciones = siniestro.Observaciones,
 
+                Emergencias = _combosHelper.GetComboEmergencias(),
+                EmergenciaID = siniestro.Emergencia.EmergenciaID,
+                Localidades = _combosHelper.GetComboLocalidades(),
+                LocalidadID = siniestro.Localidad.LocalidadID
+                             
+            };
+        }
     }
 }

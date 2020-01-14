@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Firefighters.Web.Models
 {
@@ -36,7 +34,7 @@ namespace Firefighters.Web.Models
         public Int16 UbicacionId { get; set; }
 
         public IEnumerable<SelectListItem> Ubicaciones { get; set; }
-           
+
         public IEnumerable<SelectListItem> Estados { get; set; }
 
         public IEnumerable<SelectListItem> Titulares { get; set; }

@@ -7,10 +7,10 @@
 <h2 class="text-center">SINIESTROS</h2>
 
 <p>
-    <a asp-action="Create" class="btn btn-success"><i class="fas fa-plus-square"></i>&nbsp;Siniestro</a>|
+    <a asp-action="Create" class="btn btn-success"><i class="fas fa-plus-square"></i>&nbsp;Siniestro</a>
 
 </p>
-<table id="myTableElementos" class="table table-striped table-bordered" style="width:100%">
+<table id="myTableSiniestros" class="table table-striped table-bordered" style="width:100%">
     <thead>
         <tr>
             <th>
@@ -81,7 +81,7 @@
 @section Scripts{
     <script>
         $(document).ready(function () {
-            $('#myTableElementos').DataTable();
+            $('#myTableSiniestros').DataTable();
 
             // Delete item
             var item_to_delete;
@@ -92,7 +92,7 @@
             });
 
             $("#btnYesDelete").click(function () {
-                window.location.href = '/Elementos/Delete/' + item_to_delete;
+                window.location.href = '/Siniestros/Delete/' + item_to_delete;
 
             });
          
