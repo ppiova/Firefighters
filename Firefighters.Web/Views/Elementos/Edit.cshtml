@@ -13,30 +13,40 @@
 
     <partial name="_Elemento" />
 
-    @*@if (Model.Activo == false)
-        {  <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="Activo" /> @Html.DisplayNameFor(model => model.Activo)
-                    </label>
-                </div>
-            </div>}*@
+   
     @if (Model.BajaFecha != null)
     {<div class="form-row">
-            <div class="form-group col-md-4">
-                <label asp-for="BajaFecha" class="control-label"></label>
-                <input asp-for="BajaFecha" class="form-control" />
-                <span asp-validation-for="BajaFecha" class="text-danger"></span>
-            </div>
-        </div>}
+         <div class="form-group col-md-4">
+             <a>Fecha Baja: </a>@Html.DisplayFor(modelItem => Model.BajaFecha)
+         </div>
 
-    <div class="form-group">
-        <input type="submit" value="Guardar" class="btn btn-primary btn-user btn-block" /> |
-        <input type="submit" asp-action="BajaLogica" asp-route-id="@Model.ElementoID" value="NO Activo" class="btn small btn-danger " />
-    </div>
-    <div>
-        <a asp-action="Index" class="btn btn-secondary btn-block"><i class="fas fa-long-arrow-alt-left"></i>&nbsp;Volver Listado</a>
-    </div>
+   
+</div>}
+
+<div class="form-group">
+    @if (Model.BajaFecha == null)
+    {
+        <div class="form-group col-md-4"><input type="submit" asp-action="BajaLogica" asp-route-id="@Model.ElementoID" value="DAR BAJA" class="btn btn-danger btn-block " /></div>
+
+        <div class="form-group col-md-4">
+            <input type="submit" value="Guardar" class="btn btn-primary btn-user btn-block" />
+        </div>
+        <div class="col-md-4">
+            <a asp-action="Index" class="btn btn-secondary btn-block"><i class="fas fa-long-arrow-alt-left"></i>&nbsp;Volver Listado</a>
+        </div>
+    }
+    @if (Model.BajaFecha != null)
+    {
+        <div class="form-group col-md-4">
+            <input type="submit" asp-action="Activar" asp-route-id="@Model.ElementoID" value="ACTIVAR" class="btn btn-primary btn-user btn-block" />
+        </div>
+        <div class="col-md-4">
+            <a asp-action="NoActivos" class="btn btn-secondary btn-block"><i class="fas fa-long-arrow-alt-left"></i>&nbsp;Volver Listado Bajas</a>
+        </div>
+    }
+
+
+</div>
 </form>
 
 

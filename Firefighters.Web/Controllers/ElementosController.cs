@@ -202,7 +202,28 @@ namespace Firefighters.Web.Controllers
             await _dataContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-              
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Activacion(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var elemento = await _dataContext.Elementos
+                .FirstOrDefaultAsync(m => m.ElementoID == id);
+            if (elemento == null)
+            {
+                return NotFound();
+            }
+
+            elemento.Activo = true;
+            elemento.BajaFecha = null;
+            _dataContext.Elementos.Update(elemento);
+            await _dataContext.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
 
         // GET: Elementos/Delete/5
         public async Task<IActionResult> Delete(int? id)
