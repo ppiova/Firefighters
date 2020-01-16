@@ -10,6 +10,7 @@ namespace Firefighters.Web.Models
 {
     public class ElementoImageViewModel : ElementoImage
     {
+
         [Display(Name = "Imagen")]
         public IFormFile ImageFile { get; set; }
     }

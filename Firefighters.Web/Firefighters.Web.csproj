@@ -25,7 +25,6 @@
 
 
   <ItemGroup>
-    <Folder Include="wwwroot\files\Comprobantes\" />
     <Folder Include="wwwroot\images\Elementos\" />
     <Folder Include="wwwroot\images\home\" />
   </ItemGroup>

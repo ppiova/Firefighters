@@ -288,20 +288,21 @@ namespace Firefighters.Web.Controllers
             {
                 var path = string.Empty;
                 //TODO: Validar que sea png o jpg
+                var elemento = await _dataContext.Elementos.FindAsync(model.ElementoImageId);
+
                 if (model.ImageFile != null)
                 {
-                    path = await _imageHelper.UploadImageAsync(model.ImageFile);
+                    path = await _imageHelper.UploadImageAsync(model.ImageFile, elemento.ElementoID);
                 }
 
                 var elementoImage = new ElementoImage
                 {
                     ImageUrl = path,
-                    Elemento = await _dataContext.Elementos.FindAsync(model.ElementoImageId)
+                    Elemento = elemento
                 };
 
                 _dataContext.ElementoImages.Add(elementoImage);
                 await _dataContext.SaveChangesAsync();
-                //return RedirectToAction($"{nameof(Details)}/{model.ElementoImageId}");
                 return RedirectToAction("Details", "Elementos", new { @id = elementoImage.Elemento.ElementoID });
 
             }
@@ -311,6 +312,7 @@ namespace Firefighters.Web.Controllers
 
         public async Task<IActionResult> DeleteImage(int? id)
         {
+            //TODO: Eliminar de forma física el archivo
             if (id == null)
             {
                 return NotFound();
@@ -327,7 +329,6 @@ namespace Firefighters.Web.Controllers
             _dataContext.ElementoImages.Remove(elementoImage);
             await _dataContext.SaveChangesAsync();
 
-            //return RedirectToAction($"{nameof(Details)}/{elementoImage.Elemento.ElementoID}");
             return RedirectToAction("Details", "Elementos", new { @id = elementoImage.Elemento.ElementoID });
         }
 
@@ -372,7 +373,7 @@ namespace Firefighters.Web.Controllers
 
                 if (model.ComprobanteFile != null)
                 {
-                    path = await _comprobanteHelper.UploadComprobanteAsync(model.ComprobanteFile);
+                    path = await _comprobanteHelper.UploadComprobanteAsync(model.ComprobanteFile, model.Elemento.ElementoID);
 
                 }
 

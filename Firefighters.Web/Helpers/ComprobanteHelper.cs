@@ -9,15 +9,15 @@ namespace Firefighters.Web.Helpers
 {
     public class ComprobanteHelper : IComprobanteHelper
     {
-        public async Task<string> UploadComprobanteAsync(IFormFile comprobanteFile)
+        public async Task<string> UploadComprobanteAsync(IFormFile comprobanteFile, int idElemento)
         {
-            var nombre = comprobanteFile.FileName.ToString();
-            //var guid = Guid.NewGuid().ToString();
-            var file = nombre;
-            //var file = $"{nombre}.pdf";
+            var name = comprobanteFile.ToString();
+            var id = idElemento.ToString();
+            var datetime = DateTime.Now.ToString();
+            var file = $"{id + datetime + name}.pdf";
             var path = Path.Combine(
                 Directory.GetCurrentDirectory(),
-                "wwwroot\\files\\Comprobantes",
+                "wwwroot\\files\\ElementosDocs",
                 file);
 
             using (var stream = new FileStream(path, FileMode.Create))
@@ -25,7 +25,7 @@ namespace Firefighters.Web.Helpers
                 await comprobanteFile.CopyToAsync(stream);
             }
 
-            return $"/files/Comprobantes/{file}";
+            return $"/files/ElementosDocs/{file}";
         }
     }
 }

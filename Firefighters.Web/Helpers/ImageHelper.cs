@@ -7,10 +7,16 @@ namespace Firefighters.Web.Helpers
 {
     public class ImageHelper : IImageHelper
     {
-        public async Task<string> UploadImageAsync(IFormFile imageFile)
+       
+
+        public async Task<string> UploadImageAsync(IFormFile imageFile, int idElemento)
         {
-            var guid = Guid.NewGuid().ToString();
-            var file = $"{guid}.jpg";
+            var name = "elemento";
+            var id = idElemento.ToString();
+            var datetime = DateTime.Now.ToString("ddMMyyyy-Hmm");
+
+            var file = $"{datetime+"-"+id+"-"+name}.jpg";
+
             var path = Path.Combine(
                 Directory.GetCurrentDirectory(),
                 "wwwroot\\images\\Elementos",
