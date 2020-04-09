@@ -1,6 +1,11 @@
 # ASP.NET Core (.NET Framework)
 - task: DotNetCoreCLI@2
   inputs:
+    command: 'restore'
+    feedsToUse: 'select'
+    vstsFeed: '1117710f-c50e-4251-b244-21cc1c943c58'
+- task: DotNetCoreCLI@2
+  inputs:
     command: 'build'
     projects: '**/*.csproj'
 # Build and test ASP.NET Core projects targeting the full .NET Framework.
